@@ -4,17 +4,21 @@
 
 {% block content %}
 
-<h1>The Synchronicity Collective</h1>
 
-<h3>Most recent posts</h3>
+<h2>Most recent posts</h2>
 <hr>
 
 
     {% for post in posts %}
         <div class='posts'>
-            <div class="post-title">Title: {{ post.title}} </div>
+            <div class="post-title">
+                <a href="/{{post.key().id()}}" >{{ post.title}}</a>
+            </div>
             <br>
-            <div class="post-content">Content: {{ post.rendered_content() | safe }} </div>
+            <div class="post-content">Content:
+                <br>
+                {{ post.rendered_content() | safe }}
+            </div>
         </div>
         <hr>
         <br>

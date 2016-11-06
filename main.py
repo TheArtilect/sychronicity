@@ -43,10 +43,6 @@ class Post(db.Model):
         return self.content.replace("\n", "<br>")
 
 
-def render_post(response, post):
-    response.out.write('<b>' + post.title + '</b><br>')
-    response.out.write(post.content)
-
 
 class FrontPage(Handler):
     def get(self):
@@ -90,10 +86,18 @@ class PostPage(Handler):
             self.render("permalink.html", post = post)
 
 
+class SignUp(Handler):
+    def get(self):
+        self.render("sign_up.html")
+
+
+    def post(self)
+
 
 
 app = webapp2.WSGIApplication([ ("/", FrontPage),
                                 ("/newpost", NewPost),
-                                ('/([0-9]+)', PostPage)
+                                ('/([0-9]+)', PostPage),
+                                ("/signup", SignUp)
                                 ],
                                 debug=True)
