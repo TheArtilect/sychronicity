@@ -1,0 +1,22 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>The Synchronicity Collective</h1>
+
+<h3>Most recent posts</h3>
+<hr>
+
+
+    {% for post in posts %}
+        <div class='posts'>
+            <div class="post-title">{{ post.subject}} </div>
+            <div class="post-content"> {{post.content}} </div>
+        </div>
+    {% endfor %}
+
+
+
+{% endblock %}
