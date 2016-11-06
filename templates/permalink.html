@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <h3 class="post-title">{{post.title}}</h3>
+
+
+    <h3>Content:</h3>
+    <br>
+    <div class="post-content">
+        {{ post.rendered_content() | safe }}
+    </div>
+    <p class="timestamp">{{post.created.strftime("Created: %I:%M %p on %b %d, %Y ")}}</p>
+
+
+{% endblock %}
