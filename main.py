@@ -5,11 +5,13 @@ import hashing
 
 
 from Handler import Handler
-import Post
 from NewPostPage import NewPost
 from PostPage import PostPage
 from SignUpPage import SignUpPage
 from WelcomePage import WelcomePage
+
+import Post
+import User
 
 from google.appengine.ext import db
 
