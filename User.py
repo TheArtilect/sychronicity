@@ -23,6 +23,6 @@ class User(db.Model):
         user = db.GqlQuery(query)
         return user
 
-    @classmethod
-    def reigster(class, name, password, email = None):
-        hashed_password =
+    # @classmethod
+    # def register (class, name, password, email = None):
+    #     hashed_password =
