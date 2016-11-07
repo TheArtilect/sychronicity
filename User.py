@@ -9,7 +9,7 @@ def users_key(group = 'default'):
 
 class User(db.Model):
     name = db.StringProperty(required = True)
-    pw_hash = db.StringProperty(required = True)
+    pass_hash = db.StringProperty(required = True)
     email = db.StringProperty()
 
     @classmethod
@@ -19,10 +19,21 @@ class User(db.Model):
 
     @classmethod
     def retrieve_by_name(class, name):
-        query = "SELECT * FROM User WHERE name=%s" % name
-        user = db.GqlQuery(query)
+        #   query = "SELECT * FROM User WHERE name=%s" % name
+        user = User.all().filter('name =', name).get()
         return user
 
-    # @classmethod
-    # def register (class, name, password, email = None):
-    #     hashed_password =
+    @classmethod
+    def register (class, name, password, email = None):
+        pass_hash = make_pass_hash(name, password)
+        return User( parent = users_key(),
+                    name = name,
+                    pass_hash = pass_hash,
+                    email = email
+                    )
+
+    @classmethod
+    def login(cls,name, password):
+        user = cls.by_name(name)
+        if user and valid_pass(name, password, user.pass_hash):
+            return user
