@@ -1,9 +1,6 @@
 
 import webapp2
 
-import hashing
-
-
 from Handler import Handler
 from NewPostPage import NewPost
 from PostPage import PostPage
