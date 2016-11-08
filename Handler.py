@@ -3,11 +3,14 @@ import jinja2
 import webapp2
 import hmac
 
+from User import User
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                 autoescape = True)
 
 
+phrase = "That'sGold,Jerry.GOLD!"
 def make_secure(unsecured):
     return '%s|%s' % (hmac.new(phrase, unsecured).hexdigest(), unsecured)
 
@@ -56,4 +59,4 @@ class Handler(webapp2.RequestHandler):
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         user_id = self.read_secure_cookie('user_id')
-        self.user = user_id and User.by_id(int(user_id))
+        self.user = user_id and User.retrieve_by_id(int(user_id))

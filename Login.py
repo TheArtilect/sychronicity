@@ -15,4 +15,4 @@ class Login(Handler):
             self.redirect("/")
         else:
             error_message = "Invalid login"
-            self.render("login.html", error = error_ message)
+            self.render("login.html", error = error_message)
