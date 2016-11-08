@@ -7,20 +7,32 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                 autoescape = True)
 
+
+def make_secure(unsecured):
+    return '%s|%s' % (hmac.new(phrase, unsecured).hexdigest(), unsecured)
+
+def check_secure(secured_pass):
+    unsecured = secured_pass.split('|')[1]
+    if secured_pass == make_secure(unsecured):
+        return unsecured
+
+
 class Handler(webapp2.RequestHandler):
     # def render_str(self, template, **params):
     #     params['user'] = self.user
     #     return render_str(template, **params)
 
-    def write(self, *a, **kw):
-        self.response.out.write(*a, **kw)
+    def write(self, *a, **keywords):
+        self.response.out.write(*a, **keywords)
 
+    #   might not work
     def render_str(self, template, **params):
         temp = jinja_env.get_template(template)
+        params['user'] = self.user
         return temp.render(params)
 
-    def render(self, template, **kw):
-        self.write(self.render_str(template, **kw))
+    def render(self, template, **keywords):
+        self.write(self.render_str(template, **keywords))
 
     def set_secure_cookie(self, name, value):
         secured_cookie = make_secure(value)
@@ -45,14 +57,3 @@ class Handler(webapp2.RequestHandler):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         user_id = self.read_secure_cookie('user_id')
         self.user = user_id and User.by_id(int(user_id))
-
-
-
-
-def make_secure(unsecured):
-    return '%s|%s' % (hmac.new(phrase, unsecured).hexdigest(), unsecured)
-
-def check_secure(secured_pass):
-    unsecured = secured_pass.split('|')[1]
-    if secured_pass == make_secure(unsecured):
-        return unsecured

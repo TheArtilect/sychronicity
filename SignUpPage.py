@@ -4,6 +4,7 @@ import hmac
 from string import letters
 
 from Handler import Handler
+from User import User
 
 class SignUpPage(Handler):
     def get(self):
@@ -43,7 +44,7 @@ class SignUpPage(Handler):
             user = User.register(self.username, self.password, self.email)
             user.put()
 
-#            self.login(user)
+            self.login(user)
             self.render("welcome.html", username = username)
 
 

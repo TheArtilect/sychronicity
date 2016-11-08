@@ -2,12 +2,17 @@ from Handler import Handler
 import Post
 
 class NewPost(Handler):
-#   NEED TO ADD TO SEE IF USER IS LOGGED IN
+
     def get(self):
-        self.render("new_post.html")
+        if self.user:
+            self.render("new_post.html")
+        else:
+            self.redirect("/login")
 
     def post(self):
-#   NEED TO ADD TO SEE IF USER IS LOGGED IN
+        if not self.user:
+            self.redirect("/login")
+            
         title = self.request.get("title")
         content = self.request.get("content")
 
