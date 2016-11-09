@@ -1,5 +1,5 @@
 from Handler import Handler
-from Post import Post
+import Post
 
 class NewPost(Handler):
 
@@ -18,7 +18,7 @@ class NewPost(Handler):
 
         if title and content:
             creator = self.user.name
-            posting = Post(parent = Post.blog_key(), title = title,
+            posting = Post.Post(parent = Post.blog_key(), title = title,
                                 content = content, creator = creator)
             posting.put()
             posting_id = posting.key().id()

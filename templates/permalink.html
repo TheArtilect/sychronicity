@@ -2,6 +2,9 @@
 
 {% block content %}
 
+    {% for comment in comments %}
+        <p>{{comment.rendered_comment() | safe }}</p>
+    {% endfor %}
 
     <h3 class="post-title">{{ post.title }}</h3>
 
@@ -18,6 +21,11 @@
     {% if user.name == post.creator %}
         <p><a href="/modify">Modify</a></p>
     {% endif %}
+
+    <form method='post'>
+        <textarea name="comment"></textarea>
+        <input type='submit'>
+    </form>
 
 
 {% endblock %}
