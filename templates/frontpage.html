@@ -19,6 +19,7 @@
                 <a href="/{{post.key().id()}}" >{{ post.title}}</a>
             </div>
             <br>
+            <p>By: {{post.creator}}</p>
             <div class="post-content">Content:
                 <br>
                 {{ post.rendered_content() | safe }}

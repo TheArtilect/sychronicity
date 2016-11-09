@@ -12,14 +12,14 @@ class NewPost(Handler):
     def post(self):
         if not self.user:
             self.redirect("/login")
-            
+
         title = self.request.get("title")
         content = self.request.get("content")
 
         if title and content:
-            #   add user to this
+            creator = self.user.name
             posting = Post.Post(parent = Post.blog_key(), title = title,
-                                content = content)
+                                content = content, creator = creator)
             posting.put()
             posting_id = posting.key().id()
             self.redirect("/%s" % str(posting_id))

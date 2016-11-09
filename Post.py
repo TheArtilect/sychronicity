@@ -4,6 +4,7 @@ from google.appengine.ext import db
 class Post(db.Model):
     title = db.StringProperty(required = True)
     content = db.TextProperty(required = True)
+    creator = db.StringProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
     #   need to add the user that created it, likes, comments
