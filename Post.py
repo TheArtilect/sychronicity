@@ -14,4 +14,4 @@ class Post(db.Model):
 
 
 def blog_key(name = 'default'):
-    return db.Key.from_path('/', name)
+    return db.Key.from_path('posts', name)
