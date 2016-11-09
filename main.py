@@ -17,8 +17,11 @@ from google.appengine.ext import db
 
 class FrontPage(Handler):
     def get(self):
+        user = ''
+        if self.user:
+            user = self.user.name
         posts = db.GqlQuery("SELECT * From Post ORDER BY created DESC LIMIT 10")
-        self.render("frontpage.html", posts = posts)
+        self.render("frontpage.html", posts = posts, user = user)
 
 
 

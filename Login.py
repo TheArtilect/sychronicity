@@ -12,7 +12,7 @@ class Login(Handler):
         user = User.login(username, password)
         if user:
             self.login(user)
-            self.redirect("/")
+            self.redirect("/welcome")
         else:
             error_message = "Invalid login"
             self.render("login.html", error = error_message)
