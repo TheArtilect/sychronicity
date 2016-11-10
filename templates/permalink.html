@@ -24,4 +24,14 @@
         <p>{{comment.rendered_comment() | safe }}</p>
     {% endfor %}
 
+    <form method="post">
+        <input type="submit" name="likes">LIKE
+    </form>
+
+    <p>{{likes}}</p>
+
+    <form method="post">
+        <input type='submit' name='delete_post'>DELETE
+    </form>
+
 {% endblock %}

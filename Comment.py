@@ -6,8 +6,8 @@ def comment_key(name = 'default'):
 
 
 class Comment(db.Model):
-    user = db.StringProperty(required = True)
     p_id = db.StringProperty(required = True)
+    user = db.StringProperty(required = True)
     comment = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
