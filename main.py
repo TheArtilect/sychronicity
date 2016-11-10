@@ -11,6 +11,7 @@ from Logout import Logout
 
 import Post
 import User
+import Comment
 
 from google.appengine.ext import db
 

@@ -2,9 +2,6 @@
 
 {% block content %}
 
-    {% for comment in comments %}
-        <p>{{comment.rendered_comment() | safe }}</p>
-    {% endfor %}
 
     <h3 class="post-title">{{ post.title }}</h3>
 
@@ -18,14 +15,13 @@
 
     <p class="timestamp">{{post.created.strftime("Created: %I:%M %p on %b %d, %Y ")}}</p>
 
-    {% if user.name == post.creator %}
-        <p><a href="/modify">Modify</a></p>
-    {% endif %}
-
     <form method='post'>
-        <textarea name="comment"></textarea>
+        <textarea name="comment" value=""></textarea>
         <input type='submit'>
     </form>
 
+    {% for comment in comments %}
+        <p>{{comment.rendered_comment() | safe }}</p>
+    {% endfor %}
 
 {% endblock %}

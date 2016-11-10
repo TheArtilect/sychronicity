@@ -1,3 +1,13 @@
+import os
+import jinja2
+import webapp2
+
+
+from User import User
+
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
+                                autoescape = True)
 
 from Handler import Handler
 import Post
@@ -7,16 +17,15 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
-    # query_string = "SELECT * FROM Comment WHERE p_id=%s ORDER BY created DESC LIMIT 10" % post_id
-    # comments = db.GqlQuery(query_string)
-    # return comments
-    comments = Comment.Comment.all().filter('p_id =', post_id).get()
-    return comments
+    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC " % post_id)
+
+
 
 class PostPage(Handler):
     def get(self, post_id):
         post_key = db.Key.from_path("Post", int(post_id), parent=Post.blog_key())
         post = db.get(post_key)
+
         comments = get_comments(post_id)
 
         user = ''
@@ -34,10 +43,8 @@ class PostPage(Handler):
 
 
     def post(self, post_id):
-        post_key = db.Key.from_path("Post", int(post_id),
-                                    parent=Post.blog_key())
+        post_key = db.Key.from_path("Post", int(post_id), parent=Post.blog_key())
         post = db.get(post_key)
-
 
         if not self.user:
             self.redirect("/login")
@@ -53,16 +60,6 @@ class PostPage(Handler):
                                     )
             comment_obj.put()
 
-        query_string = "SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC LIMIT 10" % str(post_id)
-        comments = db.GqlQuery(query_string)
+        comments = get_comments(post_id)
 
-        self.render("permalink.html", post = post, user = user, comments = comments)
-
-    #
-    # def post(self, post_id):
-    #     post_key = db.Key.from_path("Post", int(post_id), parent=Post.blog_key())
-    #     post = db.get(post_key)
-    #
-    #     user = ''
-    #     if self.user:
-    #         user = self.user
+        self.render("permalink.html", comments = comments, post = post, user = user)

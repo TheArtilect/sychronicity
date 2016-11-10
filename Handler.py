@@ -21,14 +21,12 @@ def check_secure(secured_pass):
 
 
 class Handler(webapp2.RequestHandler):
-    # def render_str(self, template, **params):
-    #     params['user'] = self.user
-    #     return render_str(template, **params)
+
 
     def write(self, *a, **keywords):
         self.response.out.write(*a, **keywords)
 
-    #   might not work
+
     def render_str(self, template, **params):
         temp = jinja_env.get_template(template)
         params['user'] = self.user
