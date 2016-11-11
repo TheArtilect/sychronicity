@@ -2,25 +2,51 @@
 
 {% block content %}
 
-
-    <h3 class="post-title">{{ post.title }}</h3>
-
-    <h4>By {{ post.creator }}</h4>
-
-    <br>
-    <div class="post-content">
-        {{ post.rendered_content() | safe }}
-    </div>
+{% if modify %}
+<form method="post">
+    <label>
+        <h3>Title</h3>
+        <input type="text" name="title" value="{{post.title}}">
+    </label>
     <br>
 
-    <p class="timestamp">{{post.created.strftime("Created: %I:%M %p on %b %d, %Y ")}}</p>
+    <label>
+        <h3>Posting</h3>
+        <textarea name="content" value="{{post.content}}"></textarea>
+    </label>
+
+    <br>
+
+    <input type="submit" name='change'>
+</form>
+{% else %}
+
+
+<h3 class="post-title">{{ post.title }}</h3>
+
+<h4>By {{ post.creator }}</h4>
+
+<br>
+<div class="post-content">
+    {{ post.rendered_content() | safe }}
+</div>
+<br>
+
+<p class="timestamp">{{post.created.strftime("Created: %I:%M %p on %b %d, %Y ")}}</p>
+
+<form method='post'>
+    <input type='submit' name="modify" value="Modify">
+</form>
+{% endif %}
 
     <form method='post'>
         <textarea name="comment" value=""></textarea>
+        <br>
         <input type='submit'>
     </form>
 
     {% for comment in comments %}
+        <h4>{{comment.user}} said:</h4>
         <p>{{comment.rendered_comment() | safe }}</p>
     {% endfor %}
 

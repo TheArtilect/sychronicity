@@ -20,16 +20,12 @@ class PostPage(Handler):
 
         comments = get_comments(post_id)
 
-        user = ''
-        if self.user:
-            user = self.user
-
         if not post:
             self.write("There is no post with that id number!")
             return
         else:
             self.render("permalink.html", comments = comments, post = post,
-                        user = user, likes = likes)
+                        likes = likes)
 
 
 
@@ -44,6 +40,8 @@ class PostPage(Handler):
         likes_list = post.likes
         likes = len(likes_list)
 
+        modify = False
+
 
 
         user = ''
@@ -51,7 +49,6 @@ class PostPage(Handler):
             self.redirect("/login")
         else:
             user = self.user.name
-
 
         if self.request.get("comment"):
             comment = self.request.get("comment")
@@ -64,6 +61,15 @@ class PostPage(Handler):
             comment_obj.put()
 
         comments = get_comments(post_id)
+
+        if self.request.get("change"):
+            modify = False
+
+
+        if (creator == user) and (self.request.get("modify")):
+            modify = True
+
+
 
 
         error_delete = ''
@@ -89,4 +95,4 @@ class PostPage(Handler):
 
         self.render("permalink.html", comments = comments, post = post,
                     user = user, likes = likes, error_delete = error_delete,
-                    error_like = error_like)
+                    error_like = error_like, modify = modify)
