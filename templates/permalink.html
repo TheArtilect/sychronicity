@@ -25,13 +25,15 @@
     {% endfor %}
 
     <form method="post">
-        <input type="submit" name="likes">LIKE
+        <p>{{likes}} Likes</p> <input type="submit" name="likes" value="Like">
     </form>
+    <p class="error">{{error_like}}</p>
 
-    <p>{{likes}}</p>
+
 
     <form method="post">
-        <input type='submit' name='delete_post'>DELETE
+        <input type='submit' name='delete_post' value="Delete">
     </form>
+    <p class="error">{{error_delete}}</p>
 
 {% endblock %}

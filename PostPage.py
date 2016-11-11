@@ -28,7 +28,8 @@ class PostPage(Handler):
             self.write("There is no post with that id number!")
             return
         else:
-            self.render("permalink.html", comments = comments, post = post, user = user, likes = likes)
+            self.render("permalink.html", comments = comments, post = post,
+                        user = user, likes = likes)
 
 
 
@@ -45,11 +46,11 @@ class PostPage(Handler):
 
 
 
-
+        user = ''
         if not self.user:
             self.redirect("/login")
-
-        user = self.user.name
+        else:
+            user = self.user.name
 
 
         if self.request.get("comment"):
@@ -62,18 +63,30 @@ class PostPage(Handler):
                                     )
             comment_obj.put()
 
-
         comments = get_comments(post_id)
 
 
+        error_delete = ''
         if (creator == user) and (self.request.get("delete_post")):
             db.delete(post_key)
             self.redirect("/")
+        elif (creator != user) and (self.request.get("delete_post")):
+            error_delete = "You can only delete your own posts."
 
-        if (not user in likes_list) and (self.request.get("likes")):
+
+        error_like = ''
+        if (not user in likes_list) and (self.request.get("likes") and
+            (creator != user)):
             post.likes.append(user)
             post.put()
             likes = len(likes_list)
+        else:
+            if (user in likes_list) and (self.request.get("likes")):
+                error_like = "You have already liked this post!"
+            if (creator == user) and (self.request.get("likes")):
+                error_like = "You cannot like your own post!"
 
 
-        self.render("permalink.html", comments = comments, post = post, user = user, likes = likes)
+        self.render("permalink.html", comments = comments, post = post,
+                    user = user, likes = likes, error_delete = error_delete,
+                    error_like = error_like)
