@@ -17,5 +17,9 @@ class Comment(db.Model):
         comments = Comment.all().filter("p_id = ", p_id).get()
         return comments
 
+
     def rendered_comment(self):
         return self.comment.replace("\n", "<br>")
+
+    def unrender_comment(self):
+        return self.comment.replace("<br>", "\n")

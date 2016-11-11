@@ -35,20 +35,25 @@ class PostPage(Handler):
         post_key = db.Key.from_path("Post", int(post_id),
                                     parent=Post.blog_key())
         post = db.get(post_key)
+
         creator = post.creator
+        user = ''
+
+        comments = get_comments(post_id)
 
         likes_list = post.likes
         likes = len(likes_list)
 
-        modify = False
+        edit_post = False
+
+        error = ''
 
 
-
-        user = ''
         if not self.user:
             self.redirect("/login")
         else:
             user = self.user.name
+
 
         if self.request.get("comment"):
             comment = self.request.get("comment")
@@ -60,45 +65,63 @@ class PostPage(Handler):
                                     )
             comment_obj.put()
 
-        comments = get_comments(post_id)
 
-        error = ''
+        edit_comment = False
+        comment_obj = {}
+        if self.request.get('edit_comment'):
+            comment_id = self.request.get("edit_comment_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id),
+                                            parent=Comment.comment_key())
+            comment_obj = db.get(comment_key)
+            if (user != comment_obj.user):
+                error = "Only the author can edit this comment"
+            else:
+                edit_comment = True
+                if self.request.get("edit_comment_text"):
+                    comment_obj.comment = self.request.get("edit_comment_text")
+                    comment_obj.put()
+                    edit_comment = False
+                    self.redirect("/%s" % post_id)
+
+
+
+
 
         if self.request.get("change"):
             post.content = self.request.get("change")
             post.put()
-            modify = False
+            edit_post = False
             self.redirect("/%s" % post_id)
+
 
         if self.request.get('edit'):
             if (creator == user):
-                modify = True
+                edit_post = True
             else:
                 error = "Only the author can edit this post!"
 
 
+        if self.request.get("delete_post"):
+            if (creator == user):
+                db.delete(post_key)
+                self.redirect("/")
+            else:
+                error = "You can only delete your own posts."
 
 
-
-
-        if (creator == user) and (self.request.get("delete_post")):
-            db.delete(post_key)
-            self.redirect("/")
-        elif (creator != user) and (self.request.get("delete_post")):
-            error = "You can only delete your own posts."
-
-
-        if (not user in likes_list) and (self.request.get("likes") and
-            (creator != user)):
-            post.likes.append(user)
-            post.put()
-            likes = len(likes_list)
-        else:
-            if (user in likes_list) and (self.request.get("likes")):
-                error = "You have already liked this post!"
-            if (creator == user) and (self.request.get("likes")):
+        if self.request.get("likes"):
+            if (creator == user):
                 error = "You cannot like your own post!"
+            else:
+                if not (user in likes_list):
+                    post.likes.append(user)
+                    post.put()
+                    likes = len(likes_list)
+                else:
+                    error = "You have already liked this post!"
 
 
         self.render("permalink.html", comments = comments, post = post,
-                    user = user, likes = likes, error = error, modify = modify)
+                    likes = likes, error = error, edit_post = edit_post,
+                    edit_comment = edit_comment,
+                    comment_obj = comment_obj)

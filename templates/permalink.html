@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <p class='error'>{{error}}</p>
 
-    {% if modify %}
+    {% if edit_post %}
+    <h2>Edit your blog</h2>
     <form method="post">
         <label>
             <h3>Title</h3>
@@ -34,7 +36,9 @@
     </div>
     <br>
 
-    <p class="timestamp">{{post.created.strftime("Created: %I:%M %p on %b %d, %Y ")}}</p>
+    <p class="timestamp">{{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}</p>
+
+    <p class="timestamp">{{post.created.strftime("Created: %b %d, %Y %I:%M %p ")}}</p>
     <br>
 
     <p id="post-likes">{{likes}} Likes</p>
@@ -53,10 +57,7 @@
         <input type='submit' name='delete_post' value="Delete">
     </form>
     <br>
-    {% endif %}
-
-    <p class='error'>{{error}}</p>
-
+    <br>
 
     <form method='post'>
         <h6>Post a comment below:</h6>
@@ -64,14 +65,33 @@
         <br>
         <input type='submit'>
     </form>
+    <br>
+
+    {% endif %}
+
+
+    {% if edit_comment %}
+    <form method="post">
+        <h5>Edit comment</h5>
+        <textarea name='edit_comment_text'>{{comment_obj.unrender_comment() | safe}}</textarea>
+        <input type='submit'>
+    </form>
+    {% endif %}
+
 
     {% for comment in comments %}
-    <div class="comment">
-        <h5 class="comment-header">{{comment.user}} said:</h5>
-        <p class='comment-content'>{{comment.rendered_comment() | safe }}</p>
-        <p>{{post.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
-    </div>
-    <hr>
+
+        <div class="comment">
+            <h5 class="comment-header">{{comment.user}} said:</h5>
+            <p class='comment-content'>{{comment.rendered_comment() | safe }}</p>
+            <p>{{post.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
+            <form method='post'>
+                <input type='hidden' name="edit_comment_id" value='{{comment.key().id()}}'>
+                <input type='submit' name="edit_comment" value="Edit">
+            </form>
+        </div>
+        <hr>
+
     {% endfor %}
 
 
