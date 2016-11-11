@@ -1,0 +1,8 @@
+put refresh on comment submit
+
+User db add post listing
+for possible users page later on
+
+edit and delete comments
+
+lots of styling to be done
