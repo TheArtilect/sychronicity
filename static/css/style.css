@@ -1,7 +1,13 @@
+
+
+body{
+
+}
+
 .posts {
     border: 1px solid black;
 }
 
-body{
-
+.error{
+    color: red;
 }

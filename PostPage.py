@@ -62,25 +62,32 @@ class PostPage(Handler):
 
         comments = get_comments(post_id)
 
+        error = ''
+
         if self.request.get("change"):
+            post.content = self.request.get("change")
+            post.put()
             modify = False
+            self.redirect("/%s" % post_id)
+
+        if self.request.get('edit'):
+            if (creator == user):
+                modify = True
+            else:
+                error = "Only the author can edit this post!"
 
 
-        if (creator == user) and (self.request.get("modify")):
-            modify = True
 
 
 
 
-        error_delete = ''
         if (creator == user) and (self.request.get("delete_post")):
             db.delete(post_key)
             self.redirect("/")
         elif (creator != user) and (self.request.get("delete_post")):
-            error_delete = "You can only delete your own posts."
+            error = "You can only delete your own posts."
 
 
-        error_like = ''
         if (not user in likes_list) and (self.request.get("likes") and
             (creator != user)):
             post.likes.append(user)
@@ -88,11 +95,10 @@ class PostPage(Handler):
             likes = len(likes_list)
         else:
             if (user in likes_list) and (self.request.get("likes")):
-                error_like = "You have already liked this post!"
+                error = "You have already liked this post!"
             if (creator == user) and (self.request.get("likes")):
-                error_like = "You cannot like your own post!"
+                error = "You cannot like your own post!"
 
 
         self.render("permalink.html", comments = comments, post = post,
-                    user = user, likes = likes, error_delete = error_delete,
-                    error_like = error_like, modify = modify)
+                    user = user, likes = likes, error = error, modify = modify)

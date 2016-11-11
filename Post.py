@@ -9,12 +9,12 @@ class Post(db.Model):
     last_modified = db.DateTimeProperty(auto_now = True)
     likes = db.StringListProperty()
 
-    #   need to add the user that created it, likes, comments
-
-
 
     def rendered_content(self):
         return self.content.replace("\n", "<br>")
+
+    def render_back(self):
+        return self.content.replace("<br>", "\n")
 
 
 def blog_key(name = 'default'):
