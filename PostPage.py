@@ -64,34 +64,14 @@ class PostPage(Handler):
                                     comment = comment
                                     )
             comment_obj.put()
-
-
-        edit_comment = False
-        comment_obj = {}
-        if self.request.get('edit_comment'):
-            comment_id = self.request.get("edit_comment_id")
-            comment_key = db.Key.from_path("Comment", int(comment_id),
-                                            parent=Comment.comment_key())
-            comment_obj = db.get(comment_key)
-            if (user != comment_obj.user):
-                error = "Only the author can edit this comment"
-            else:
-                edit_comment = True
-                if self.request.get("edit_comment_text"):
-                    comment_obj.comment = self.request.get("edit_comment_text")
-                    comment_obj.put()
-                    edit_comment = False
-                    self.redirect("/%s" % post_id)
-
-
-
+            self.redirect("/")
 
 
         if self.request.get("change"):
             post.content = self.request.get("change")
             post.put()
             edit_post = False
-            self.redirect("/%s" % post_id)
+            self.redirect("/")
 
 
         if self.request.get('edit'):
@@ -122,6 +102,4 @@ class PostPage(Handler):
 
 
         self.render("permalink.html", comments = comments, post = post,
-                    likes = likes, error = error, edit_post = edit_post,
-                    edit_comment = edit_comment,
-                    comment_obj = comment_obj)
+                    likes = likes, error = error, edit_post = edit_post)

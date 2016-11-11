@@ -6,16 +6,14 @@
     {% if edit_post %}
     <h2>Edit your blog</h2>
     <form method="post">
-        <label>
-            <h3>Title</h3>
+        <label><h3>Title</h3></label>
             <input type="text" name="title" value="{{post.title}}">
-        </label>
+
         <br>
 
-        <label>
-            <h3>Posting</h3>
-            <textarea name="change">{{ post.render_back() | safe }}</textarea>
-        </label>
+        <h3>Posting</h3>
+        <textarea name="change">{{ post.render_back() | safe }}</textarea>
+
 
         <br>
 
@@ -70,25 +68,14 @@
     {% endif %}
 
 
-    {% if edit_comment %}
-    <form method="post">
-        <h5>Edit comment</h5>
-        <textarea name='edit_comment_text'>{{comment_obj.unrender_comment() | safe}}</textarea>
-        <input type='submit'>
-    </form>
-    {% endif %}
-
 
     {% for comment in comments %}
 
         <div class="comment">
             <h5 class="comment-header">{{comment.user}} said:</h5>
             <p class='comment-content'>{{comment.rendered_comment() | safe }}</p>
-            <p>{{post.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
-            <form method='post'>
-                <input type='hidden' name="edit_comment_id" value='{{comment.key().id()}}'>
-                <input type='submit' name="edit_comment" value="Edit">
-            </form>
+            <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
+
         </div>
         <hr>
 

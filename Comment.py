@@ -12,6 +12,7 @@ class Comment(db.Model):
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
 
+    #   for all comments in a post
     @classmethod
     def retrieve_by_p_id(cls, p_id):
         comments = Comment.all().filter("p_id = ", p_id).get()
