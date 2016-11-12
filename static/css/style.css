@@ -117,3 +117,18 @@ input[type='submit']{
     margin-top: 1vh;
     margin-right: 0;
 }
+
+   /*  signup  */
+
+
+   /*   permalink   */
+
+.permalink-post{
+    border: 1px solid black;
+}
+.permalink-post-header{
+
+}
+.post-footer{
+
+}

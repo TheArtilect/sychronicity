@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<div id="permalink">
 
     {% if edit_post %}
     <h2>Edit your blog</h2>
@@ -22,48 +22,52 @@
 
     {% else %}
 
+    <div class='permalink-post col-md-12'>
+        <div class="permalink-post-header">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <h4>By {{ post.creator }}</h4>
+            <p class="timestamp">{{post.created.strftime("Created: %b %d, %Y %I:%M %p ")}}</p>
+        </div>
 
-    <h3 class="post-title">{{ post.title }}</h3>
+        <div class="post-content container-fluid text-justify">
+            <p>{{ post.rendered_content() | safe }}</p>
+        </div>
 
-    <h4>By {{ post.creator }}</h4>
+        <div class='container-fluid post-footer'>
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="timestamp">{{post.last_modified.strftime("Modified: %b %d, %Y %I:%M %p")}}</p>
+                </div>
+                <div class="col-md-1 col-md-offset-1">
+                    <p id="post-likes">{{likes}} Likes</p>
+                </div>
+            </div>
+        </div>
 
-    <br>
-    <div class="post-content">
-        {{ post.rendered_content() | safe }}
-    </div>
-    <br>
+        <br>
 
-    <p class="timestamp">{{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}</p>
+            {% if user_already_liked %}
 
-    <p class="timestamp">{{post.created.strftime("Created: %b %d, %Y %I:%M %p ")}}</p>
-    <br>
+            <form method="post">
+                <input type="submit" name="unlike" value="Unlike" class="refresh">
+            </form>
+            {% else %}
+            <form method="post">
+                <input type="submit" name="likes" value="Like" class="refresh">
+            </form>
+            {% endif %}
 
-    <p id="post-likes">{{likes}} Likes</p>
-
-    <br>
-
-        {% if user_already_liked %}
+        <form method='post'>
+            <input type='submit' name="edit" value="Edit" class="refresh">
+        </form>
 
         <form method="post">
-            <input type="submit" name="unlike" value="Unlike" class="refresh">
+            <input type='submit' name='delete_post' value="Delete" class="refresh">
         </form>
-        {% else %}
-        <form method="post">
-            <input type="submit" name="likes" value="Like" class="refresh">
-        </form>
-        {% endif %}
-
-    <form method='post'>
-        <input type='submit' name="edit" value="Edit" class="refresh">
-    </form>
-
-    <form method="post">
-        <input type='submit' name='delete_post' value="Delete" class="refresh">
-    </form>
-    <br>
+        <br>
         <p class='error'>{{error}}</p>
+    </div>  <!-- permalink post -->
     <br>
-
     <form method='post'>
         <h6>Post a comment below:</h6>
         <textarea name="comment" value=""></textarea>
@@ -103,7 +107,7 @@
         <hr>
 
     {% endfor %}
-
+</div>
 
 
 {% endblock %}
