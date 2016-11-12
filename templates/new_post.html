@@ -3,26 +3,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="new-post">
+    <h2>Create a new post</h2>
 
-<h2>Create a new post</h2>
+    <form method="post">
+        <label>Title</label>
+        <input type="text" name="title">
 
-<form method="post">
-    <label>Title</label>
-    <input type="text" name="title">
+        <br>
+        <br>
 
-    <br>
-    <br>
-
-    <label>Post</label>
-    <textarea name="content"></textarea>
+        <h3>Content</h3>
+        <br>
+        <textarea name="content" id='new-post-textarea'></textarea>
 
 
-    <br>
-
-    <input type="submit">
-
-</form>
-
+        <br>
+        <div class='col-md-offset-11 col-md-1'>
+        <input class='submit-button' id='new-post-submit' type="submit">
+        </div>
+    </form>
+</div>
 
 
 

@@ -1,6 +1,8 @@
 
 from google.appengine.ext import db
 
+import Comment
+
 class Post(db.Model):
     title = db.StringProperty(required = True)
     content = db.TextProperty(required = True)
@@ -22,6 +24,9 @@ class Post(db.Model):
 
     def number_of_comments(self):
         return len(self.comments)
+
+
+
 
 
 def blog_key(name = 'default'):

@@ -13,15 +13,14 @@
         </p>
     </div>
 
-    <h2 id='most-recent'>Most Recent</h2>
+    <h2 id='most-recent'>Most Recent Posts</h2>
     {% for post in posts %}
         <div class='posts'>
             <a href="/{{post.key().id()}}">
             <div class='post-header'>
                 <h3 class="post-title">{{ post.title}}</h3>
-                <h5>By: {{post.creator}}</h5>
+                <h4>By: {{post.creator}}</h4>
             </div>
-            <hr>
             <div class="post-content">
                 {{ post.rendered_content() | safe }}
             </div>
@@ -33,7 +32,7 @@
                     <div class="col-md-offset-4 col-md-2">
                         {{post.number_of_likes()}} Likes
                     </div>
-                    <div class="col-md-2">{{post.number_of_comments()}} Comments</div>
+                    <div class="col-md-2">{{post.number_of_comments()}}  Comments</div>
                 </div>
             </div>
             </a>

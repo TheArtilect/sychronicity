@@ -4,15 +4,16 @@
 
 {% block content %}
 
-<div class="text-center">
+<div class="text-center login">
     <form method="post">
+        <h3>Log in</h3>
         <label>Username</label>
         <input type="text" name="username" value="{{username}}">
         <br>
-        <label>Password</label>
+        <label> Password </label>
         <input type="password" name="password" value="">
         <br>
-        <input type='submit'>
+        <input class='submit-button' id='login-submit' type='submit'>
         <p class="error">{{error}}</p>
 
     </form>

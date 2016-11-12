@@ -16,7 +16,11 @@ class PostPage(Handler):
         post = db.get(post_key)
         likes_list = post.likes
         likes = len(post.likes)
-        user = self.user.name
+        if self.user:
+            user = self.user.name
+        else:
+            user = ""
+
         user_already_liked = user in likes_list
         comments = get_comments(post_id)
 
@@ -58,8 +62,10 @@ class PostPage(Handler):
 
         user_already_liked = (user in likes_list)
 
+        if (not self.user) and self.request.get("comment"):
+            self.redirect("/login")
 
-        if self.request.get("comment"):
+        if self.request.get("comment") and self.user:
             comment = self.request.get("comment")
             p_id = post_id
             comment_obj = Comment.Comment(parent = Comment.comment_key(),

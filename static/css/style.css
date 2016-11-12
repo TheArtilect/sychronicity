@@ -1,9 +1,13 @@
-
+.navbar{
+    font-weight: 900;
+    background-color: #E9E9E9;
+}
 
 body{
-    font-family: 'Cormorant Garamond', serif;
+    padding-top: 70px;
+    font-family: 'Cormorant Garamond', monospace;
     font-weight: 500;
-    background-color: #EAEAEA;
+    background-color: #EFEFEF;
 }
 
 
@@ -20,14 +24,15 @@ a:hover{
     color: black;
 }
 
+/*
 input[type='submit']{
     color: blue;
     background: none;
     border: none;
 }
+*/
 
-
-/*  frontpage   */
+    /*  frontpage   */
 
 .frontpage{
 
@@ -43,26 +48,72 @@ input[type='submit']{
     margin-top: 1vh;
 }
 
-#most-recent{
+.frontpage-top h1{
     font-weight: bold;
-    margin-top: 5vh;
+}
+
+#most-recent{
+    font-weight: 600;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
 }
 
 .posts {
+    border-collapse: collapse;
     border: 2px solid gray;
+}
+
+.post-header{
+    border-bottom: 2px solid gray;
+    background-color: #CBCBCB;
 }
 
 .post-title{
     font-weight: bold;
+    margin-top: 0;
+    padding-top: 1vh;
+    text-decoration: underline;
 }
 
 
 .post-content{
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: #F0F0F0;
 }
 
 .post-bottom{
     background-color: grey;
-    color: #FEFBF7;
+    color: #FCFCFC;
+}
+
+
+    /*  new_post    */
+
+#new-post{
+    text-align: center;
+}
+
+#new-post h2{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+
+#new-post-textarea{
+    width: 50vw;
+    height: 40vh;
+}
+
+#new-post-submit{
+    margin-top: 2vh;
+}
+
+    /*  login */
+.login{
+    padding-top: 7vh;
+}
+#login-submit{
+    margin-top: 1vh;
+    margin-right: 0;
 }
