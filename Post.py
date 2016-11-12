@@ -8,6 +8,7 @@ class Post(db.Model):
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
     likes = db.StringListProperty()
+    comments = db.StringListProperty()
 
 
     def rendered_content(self):
@@ -15,6 +16,12 @@ class Post(db.Model):
 
     def render_back(self):
         return self.content.replace("<br>", "\n")
+
+    def number_of_likes(self):
+        return len(self.likes)
+
+    def number_of_comments(self):
+        return len(self.comments)
 
 
 def blog_key(name = 'default'):

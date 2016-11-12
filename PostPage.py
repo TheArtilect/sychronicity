@@ -18,7 +18,6 @@ class PostPage(Handler):
         likes = len(post.likes)
         user = self.user.name
         user_already_liked = user in likes_list
-        print user in likes_list
         comments = get_comments(post_id)
 
 
@@ -68,7 +67,9 @@ class PostPage(Handler):
                                     user = user,
                                     comment = comment
                                     )
-            comment_obj.put()
+            comment_key = comment_obj.put()
+            post.comments.append(str(comment_key))
+            post.put()
 
 
         if self.request.get("delete_comment"):
@@ -78,6 +79,8 @@ class PostPage(Handler):
             comment = db.get(comment_key)
             if user == comment.user:
                 db.delete(comment_key)
+                post.comments.remove(str(comment_key))
+                post.put()
 
             else:
                 error = "Only the author of this comment can delete it!"

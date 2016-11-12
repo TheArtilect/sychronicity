@@ -27,8 +27,13 @@
             </div>
             <div class="post-bottom container-fluid">
                 <div class="row">
-                    <div class="col-md-offset-8 col-md-1">Likes</div>
-                    <div class="col-md-1">Comments</div>
+                    <div class="col-md-4">
+                        {{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}
+                    </div>
+                    <div class="col-md-offset-4 col-md-2">
+                        {{post.number_of_likes()}} Likes
+                    </div>
+                    <div class="col-md-2">{{post.number_of_comments()}} Comments</div>
                 </div>
             </div>
             </a>
