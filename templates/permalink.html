@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p class='error'>{{error}}</p>
+
 
     {% if edit_post %}
     <h2>Edit your blog</h2>
@@ -16,8 +16,7 @@
 
 
         <br>
-
-        <input type="submit">
+        <input type="submit" class="refresh">
     </form>
 
 
@@ -42,37 +41,48 @@
     <p id="post-likes">{{likes}} Likes</p>
 
     <br>
-    <form method="post">
-        <input type="submit" name="likes" value="Like">
-    </form>
+
+        {% if user_already_liked %}
+
+        <form method="post">
+            <input type="submit" name="unlike" value="Unlike" class="refresh">
+        </form>
+        {% else %}
+        <form method="post">
+            <input type="submit" name="likes" value="Like" class="refresh">
+        </form>
+        {% endif %}
 
     <form method='post'>
-        <input type='submit' name="edit" value="Edit">
+        <input type='submit' name="edit" value="Edit" class="refresh">
     </form>
 
     <form method="post">
-        <input type='submit' name='delete_post' value="Delete">
+        <input type='submit' name='delete_post' value="Delete" class="refresh">
     </form>
     <br>
+        <p class='error'>{{error}}</p>
     <br>
 
     <form method='post'>
         <h6>Post a comment below:</h6>
         <textarea name="comment" value=""></textarea>
         <br>
-        <input type='submit'>
+        <input type='submit' class='refresh'>
     </form>
+    <button id="testing">Test</button>
     <br>
 
     {% endif %}
 
+<!--- not working, not saving to db
     {% if edit_comment %}
         <form method="post">
             <textarea name="edit_comment_text">{{comment_obj.unrender_comment()}}</textarea>
             <input type="submit">
         </form>
     {% endif %}
-
+-->
 
     {% for comment in comments %}
 
@@ -80,10 +90,16 @@
             <h5 class="comment-header">{{comment.user}} said:</h5>
             <p class='comment-content'>{{comment.rendered_comment() | safe }}</p>
             <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
-        <form method="post">
-            <input type="hidden" name="edit_comment_id" value="{{comment.key().id()}}">
-            <input type="submit" name='edit_comment' value="Edit">
-        </form>
+            <form method="post">
+                <input type="hidden" name="comment_id" value="{{comment.key().id()}}">
+                <input type="submit" name="delete_comment" value="Delete" class="refresh">
+            </form>
+        <!--
+            <form method="post">
+                <input type="hidden" name="edit_comment_id" value="{{comment.key().id()}}">
+                <input type="submit" name='edit_comment' value="Edit">
+            </form>
+    -->
         </div>
         <hr>
 

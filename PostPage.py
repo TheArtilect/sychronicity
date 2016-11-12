@@ -14,18 +14,21 @@ class PostPage(Handler):
         post_key = db.Key.from_path("Post", int(post_id),
                                     parent=Post.blog_key())
         post = db.get(post_key)
+        likes_list = post.likes
         likes = len(post.likes)
-
+        user = self.user.name
+        user_already_liked = user in likes_list
+        print user in likes_list
         comments = get_comments(post_id)
 
-        comment_id = self.request.get("edit_comment_id")
+
 
         if not post:
             self.write("There is no post with that id number!")
             return
         else:
             self.render("permalink.html", comments = comments, post = post,
-                        likes = likes, comment_id = comment_id)
+                        likes = likes, user_already_liked = user_already_liked)
 
 
 
@@ -48,13 +51,13 @@ class PostPage(Handler):
 
         error = ''
 
-        print self.request.get("edit_comment_id")
-
 
         if not self.user:
             self.redirect("/login")
         else:
             user = self.user.name
+
+        user_already_liked = (user in likes_list)
 
 
         if self.request.get("comment"):
@@ -66,7 +69,18 @@ class PostPage(Handler):
                                     comment = comment
                                     )
             comment_obj.put()
-            self.redirect("/")
+
+
+        if self.request.get("delete_comment"):
+            comment_id = self.request.get("comment_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id),
+                                            parent=Comment.comment_key())
+            comment = db.get(comment_key)
+            if user == comment.user:
+                db.delete(comment_key)
+
+            else:
+                error = "Only the author of this comment can delete it!"
 
         #   Not sure if comment editing needed, not working anyway
         #edit_comment = False
@@ -117,11 +131,17 @@ class PostPage(Handler):
                 if not (user in likes_list):
                     post.likes.append(user)
                     post.put()
-                    likes = len(likes_list)
-                else:
-                    error = "You have already liked this post!"
+
+
+
+        if self.request.get("unlike"):
+            post.likes.remove(user)
+            post.put()
+
+
 
 
         self.render("permalink.html", comments = comments, post = post,
                     likes = likes, error = error, edit_post = edit_post,
-                    edit_comment = edit_comment, comment_obj = comment_obj)
+                    user_already_liked = user_already_liked)
+                    #edit_comment = edit_comment, comment_obj = comment_obj)
