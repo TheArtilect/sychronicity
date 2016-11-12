@@ -1,19 +1,65 @@
 
 
 body{
-
+    font-family: 'Cormorant Garamond', serif;
 }
 
-.posts {
-    border: 1px solid black;
-}
+
 
 .error{
     color: red;
+}
+
+a {
+    color: black;
+}
+
+a:hover{
+    color: black;
 }
 
 input[type='submit']{
     color: blue;
     background: none;
     border: none;
+}
+
+
+/*  frontpage   */
+
+.frontpage{
+
+}
+
+.frontpage-top{
+
+}
+
+.frontpage-top h1,
+.frontpage-top h4,
+.frontpage-top p{
+    margin-top: 1vh;
+}
+
+#most-recent{
+    font-weight: bold;
+    margin-top: 5vh;
+}
+
+.posts {
+    border: 2px solid gray;
+}
+
+.post-title{
+    font-weight: bold;
+}
+
+
+.post-content{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.post-bottom{
+    background-color: grey;
 }

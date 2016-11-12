@@ -4,28 +4,39 @@
 
 {% block content %}
 
-
-    <div class="test">
+<div class='frontpage text-center'>
+    <div class='frontpage-top'>
         <h1>The Synchronicity Collective</h1>
-        <p>Welcome to our collective blog site.
-            In order to post content, you must be a registered user.
+        <h4>Welcome to our collective blog site.</h4>
+        <p>
+            In order to post, comment on, or like content you must be a registered user.
         </p>
     </div>
 
-    <h2>Most Recent</h2>
+    <h2 id='most-recent'>Most Recent</h2>
     {% for post in posts %}
         <div class='posts'>
-            <div class="post-title">
-                <a href="/{{post.key().id()}}" >{{ post.title}}</a>
+            <a href="/{{post.key().id()}}">
+            <div class='post-header'>
+                <h3 class="post-title">{{ post.title}}</h3>
+                <h5>By: {{post.creator}}</h5>
             </div>
-            <p>By: {{post.creator}}</p>
+            <hr>
             <div class="post-content">
                 {{ post.rendered_content() | safe }}
             </div>
+            <div class="post-bottom container-fluid">
+                <div class="row">
+                    <div class="col-md-offset-8 col-md-1">Likes</div>
+                    <div class="col-md-1">Comments</div>
+                </div>
+            </div>
+            </a>
         </div>
+
         <hr>
         <br>
     {% endfor %}
-
+</div>
 
 {% endblock %}
