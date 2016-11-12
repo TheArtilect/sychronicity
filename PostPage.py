@@ -9,8 +9,6 @@ from google.appengine.ext import db
 def get_comments(post_id):
     return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC " % post_id)
 
-
-
 class PostPage(Handler):
     def get(self, post_id):
         post_key = db.Key.from_path("Post", int(post_id),
@@ -20,12 +18,14 @@ class PostPage(Handler):
 
         comments = get_comments(post_id)
 
+        comment_id = self.request.get("edit_comment_id")
+
         if not post:
             self.write("There is no post with that id number!")
             return
         else:
             self.render("permalink.html", comments = comments, post = post,
-                        likes = likes)
+                        likes = likes, comment_id = comment_id)
 
 
 
@@ -48,6 +48,8 @@ class PostPage(Handler):
 
         error = ''
 
+        print self.request.get("edit_comment_id")
+
 
         if not self.user:
             self.redirect("/login")
@@ -65,6 +67,25 @@ class PostPage(Handler):
                                     )
             comment_obj.put()
             self.redirect("/")
+
+        #   Not sure if comment editing needed, not working anyway
+        #edit_comment = False
+        # comment_obj = None
+        # if self.request.get("edit_comment"):
+        #     comment_id = self.request.get("edit_comment_id")
+        #     comment_key = db.Key.from_path("Comment", int(comment_id),
+        #                                     parent=Comment.comment_key())
+        #     comment_obj = db.get(comment_key)
+        #     print comment_obj.user
+        #     if (user != comment_obj.user):
+        #         error = "Only the author can edit this comment"
+        #     else:
+        #         edit_comment = True
+        #         if self.request.get("edit_comment_text"):
+        #             comment_obj.comment = self.request.get("edit_comment_text")
+        #             comment_obj.put()
+        #             redirect("/%s" % post_id)
+
 
 
         if self.request.get("change"):
@@ -102,4 +123,5 @@ class PostPage(Handler):
 
 
         self.render("permalink.html", comments = comments, post = post,
-                    likes = likes, error = error, edit_post = edit_post)
+                    likes = likes, error = error, edit_post = edit_post,
+                    edit_comment = edit_comment, comment_obj = comment_obj)
