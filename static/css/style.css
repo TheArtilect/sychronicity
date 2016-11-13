@@ -1,14 +1,17 @@
 .navbar{
-    font-weight: 900;
-    background-color: #CECECE;
-    font-weight: 800;
+    background-color: #F7F7F6;
 }
 
+.navbar-header{
+    color: black;
+    font-weight: bold;
+}
 body{
+    background-image: url("/static/images/O5GLLH0.jpg");
     padding-top: 70px;
     font-family: 'Cormorant Garamond', monospace;
-    font-weight: 500;
-    background-color: #E5E5E5;
+    font-weight: 600;
+    background-color: #EFEFEF;
     font-size: 18px;
 }
 
@@ -26,7 +29,7 @@ a {
 }
 
 a:hover{
-    color: #8493A3;
+    color: #B27300;
 }
 
 
@@ -36,6 +39,7 @@ a:hover{
 .frontpage-top h4,
 .frontpage-top p{
     margin-top: 1vh;
+    font-weight: 700;
 }
 
 .frontpage-top h1{
@@ -50,32 +54,33 @@ a:hover{
 
 .posts {
     border-collapse: collapse;
-    border: 2px solid #6D6D6D;
+    border: 2px solid #575757;
 }
 
 .post-header{
-    border-bottom: 2px solid #6D6D6D;
-    background-color: #D6D6D6;
+    border-bottom: 2px solid #575757;
+    background-color: #4C4C4C;
+    color: white;
+    /*  background-color: #98928B; */
 }
 
 .post-title{
-    font-weight: bold;
+    font-weight: 800;
     margin-top: 0;
-    padding-top: 1vh;
-    text-decoration: underline;
+    padding-top: 2vh;
 }
 
 
 .post-content{
     padding-top: 2vh;
     padding-bottom: 2vh;
-    background-color: #EDEDED;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    background-color: #F5F5F5;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .post-bottom{
-    border-top: 2px solid #6D6D6D;
+    border-top: 2px solid #575757;
     background-color: grey;
     color: #F6F6F6;
 }
@@ -142,8 +147,7 @@ a:hover{
 }
 
 .unbutton:hover{
-    text-decoration: underline;
-    color: blue;
+    color: #B27300;
 }
 #delete-post-button,
 #delete-comment-button{
@@ -180,7 +184,7 @@ a:hover{
 
 .comment-content{
     padding-top: 2vh;
-    font-weight: 600;
+
 }
 .comment-row{
     padding-top: 2vh;
@@ -196,4 +200,11 @@ a:hover{
 
 .user-posts{
     padding-top: 1vh;
+}
+
+
+    /*  footer  */
+footer{
+    padding-bottom: 2vh;
+    font-size: 21px;
 }

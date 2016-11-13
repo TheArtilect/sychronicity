@@ -111,8 +111,9 @@ class PostPage(Handler):
 
 
 
-        if self.request.get("change"):
-            post.content = self.request.get("change")
+        if (self.request.get("change-title")) or (self.request.get("change-content")):
+            post.title = self.request.get("change-title")
+            post.content = self.request.get("change-content")
             post.put()
             edit_post = False
             self.redirect("/")

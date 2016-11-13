@@ -7,12 +7,12 @@
         <h2>Edit Your Post</h2>
         <form method="post">
             <label><h3>Title</h3></label>
-                <input type="text" name="title" value="{{post.title}}">
+                <input type="text" name="change-title" value="{{post.title}}">
 
             <br>
 
             <h3>Posting</h3>
-            <textarea id='edit-post-textarea' name="change">{{ post.render_back() | safe }}</textarea>
+            <textarea id='edit-post-textarea' name="change-content">{{ post.render_back() | safe }}</textarea>
 
 
             <br>
@@ -24,59 +24,58 @@
     {% else %}
 
 
-        <div class='posts'>
-            <div class='post-header text-center'>
-                <h2 class="post-title">{{ post.title}}</h2>
-                <h3>By: {{post.creator}}</h3>
-            </div>
-            <div class="post-content text-justify">
-                {{ post.rendered_content() | safe }}
-            </div>
-            <div class="post-bottom container-fluid">
-                <div class="row">
-                    <div class="col-md-5">
-                        {{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}
-                    </div>
-                    <div class="col-md-offset-3 col-md-2">
-                        {{post.number_of_likes()}} Likes
-                    </div>
-                    <div class="col-md-2">{{post.number_of_comments()}}  Comments</div>
+    <div class='posts'>
+        <div class='post-header text-center'>
+            <h3 class="post-title">{{ post.title}}</h3>
+            <h4>By: {{post.creator}}</h4>
+        </div>
+        <div class="post-content text-justify">
+            {{ post.rendered_content() | safe }}
+        </div>
+        <div class="post-bottom container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    {{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}
                 </div>
+                <div class="col-md-offset-3 col-md-2">
+                    {{post.number_of_likes()}} Likes
+                </div>
+                <div class="col-md-2">{{post.number_of_comments()}}  Comments</div>
             </div>
         </div>
+    </div>
 
-        <div class="container-fluid row-button">
-            <p class='error text-center'>{{error}}</p>
-            <div class="row">
-                <div class='col-md-1'>
-                    {% if user_already_liked %}
-                    <form method="post">
-                        <input type="submit" name="unlike" value="Unlike" class='unbutton'>
-                    </form>
-                    {% else %}
-                    <form method="post">
-                        <input type="submit" name="likes" value="Like" class='unbutton'>
-                    </form>
-                    {% endif %}
-                </div>
-
-
-                <div class=' col-md-offset-5 col-md-1'>
-                    <form method='post'>
-                        <input type='submit' name="edit" value="Edit" class='unbutton'>
-                    </form>
-                </div>
+    <div class="container-fluid row-button">
+        <div class="row">
+            <div class='col-md-1'>
+                {% if user_already_liked %}
+                <form method="post">
+                    <input type="submit" name="unlike" value="Unlike" class='unbutton'>
+                </form>
+                {% else %}
+                <form method="post">
+                    <input type="submit" name="likes" value="Like" class='unbutton'>
+                </form>
+                {% endif %}
+            </div>
 
 
-                <div class="col-md-offset-4 col-md-1">
-                    <form method="post">
-                        <input type='submit' name='delete_post' value="Delete" id='delete-post-button'>
-                    </form>
-                </div>
-            </div>  <!-- row -->
-        </div>      <!-- container-fluid -->
+            <div class=' col-md-offset-4 col-md-1'>
+                <form method='post'>
+                    <input type='submit' name="edit" value="Edit" class='unbutton'>
+                </form>
+            </div>
 
+
+            <div class="col-md-offset-4 col-md-1">
+                <form method="post">
+                    <input type='submit' name='delete_post' value="Delete" id='delete-post-button'>
+                </form>
+            </div>
+        </div>  <!-- row -->
+    </div>      <!-- container-fluid -->
     <br>
+    <p class='error text-center'>{{error}}</p>
     <hr>
     <div class='text-center post-comment'>
         <form method='post'>
@@ -102,10 +101,10 @@
     {% endif %}
 -->
     <div id='comment-section'>
-        <h2 class='text-center'>COMMENT SECTION</h2>
+        <h2 class='text-center'>COMMENTS SECTION</h2>
         {% for comment in comments %}
         <div class="comment">
-            <h3 class="comment-header">{{comment.user}} said:</h3>
+            <h3 class="comment-header text-justify">{{comment.user}} said:</h3>
             <p class='comment-content text-justify'>{{comment.rendered_comment() | safe }}</p>
             <div class="row comment-row">
                 <div class='col-md-4'>
