@@ -26,26 +26,11 @@ a {
 }
 
 a:hover{
-    color: black;
+    color: #8493A3;
 }
 
-/*
-input[type='submit']{
-    color: blue;
-    background: none;
-    border: none;
-}
-*/
 
     /*  frontpage   */
-
-.frontpage{
-
-}
-
-.frontpage-top{
-
-}
 
 .frontpage-top h1,
 .frontpage-top h4,
@@ -135,14 +120,39 @@ input[type='submit']{
 
    /*   permalink   */
 
-.row-button{
-    margin-top: 2vh;
+#edit-post-textarea{
+    height: 30vh;
+    width: 40vw;
 }
 
-#delete-post-button{
+#edit-submit{
+    margin-right: 0;
+    margin-left: 35vw;
+}
+
+.row-button{
+    margin-top: 1vh;
+}
+
+.unbutton{
+    color: black;
+    background: none;
+    border: none;
+    font-size: 22px;
+}
+
+.unbutton:hover{
+    text-decoration: underline;
+    color: blue;
+}
+#delete-post-button,
+#delete-comment-button{
     color: #7F0000;
 }
 
+.post-comment{
+    padding-bottom: 2vh;
+}
 #comment-textarea{
     width: 27vw;
     height: 7vw;
@@ -151,6 +161,33 @@ input[type='submit']{
 #comment-submit{
     margin-top: 1vh;
 }
+
+#comment-section{
+    padding-top: 2vh;
+}
+
+#comment-section h2{
+    font-weight: bold;
+}
+
+.comment{
+    padding-top: 1vh;
+}
+
+.comment-header {
+    font-weight: bold;
+}
+
+.comment-content{
+    padding-top: 2vh;
+    font-weight: 600;
+}
+.comment-row{
+    padding-top: 2vh;
+}
+
+
+
     /*  welcome */
 #welcome-page h2,
 .welcome-body h3{

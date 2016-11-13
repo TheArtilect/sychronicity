@@ -2,22 +2,23 @@
 
 {% block content %}
 <div id="permalink">
+    <div class='edit-post text-center'>
+        {% if edit_post %}
+        <h2>Edit Your Post</h2>
+        <form method="post">
+            <label><h3>Title</h3></label>
+                <input type="text" name="title" value="{{post.title}}">
 
-    {% if edit_post %}
-    <h2>Edit your blog</h2>
-    <form method="post">
-        <label><h3>Title</h3></label>
-            <input type="text" name="title" value="{{post.title}}">
+            <br>
 
-        <br>
-
-        <h3>Posting</h3>
-        <textarea name="change">{{ post.render_back() | safe }}</textarea>
+            <h3>Posting</h3>
+            <textarea id='edit-post-textarea' name="change">{{ post.render_back() | safe }}</textarea>
 
 
-        <br>
-        <input type="submit" class="refresh">
-    </form>
+            <br>
+            <input id='edit-submit' type="submit" class="refresh">
+        </form>
+    </div>
 
 
     {% else %}
@@ -50,31 +51,34 @@
                 <div class='col-md-1'>
                     {% if user_already_liked %}
                     <form method="post">
-                        <input type="submit" name="unlike" value="Unlike">
+                        <input type="submit" name="unlike" value="Unlike" class='unbutton'>
                     </form>
                     {% else %}
                     <form method="post">
-                        <input type="submit" name="likes" value="Like">
+                        <input type="submit" name="likes" value="Like" class='unbutton'>
                     </form>
                     {% endif %}
                 </div>
 
-                <div class="col-md-offset-5 col-md-1">
-                    <form method="post">
-                        <input type='submit' name='delete_post' value="Delete" id='delete-post-button'>
+
+                <div class=' col-md-offset-5 col-md-1'>
+                    <form method='post'>
+                        <input type='submit' name="edit" value="Edit" class='unbutton'>
                     </form>
                 </div>
 
-                <div class=' col-md-offset-4 col-md-1'>
-                    <form method='post'>
-                        <input type='submit' name="edit" value="Edit">
+
+                <div class="col-md-offset-4 col-md-1">
+                    <form method="post">
+                        <input type='submit' name='delete_post' value="Delete" id='delete-post-button'>
                     </form>
                 </div>
             </div>  <!-- row -->
         </div>      <!-- container-fluid -->
 
     <br>
-    <div class='text-center'>
+    <hr>
+    <div class='text-center post-comment'>
         <form method='post'>
             <h3>Post a comment below:</h3>
             <textarea id='comment-textarea' name="comment" value=""></textarea>
@@ -85,6 +89,7 @@
         </form>
     </div>
     <br>
+    <hr>
 
     {% endif %}
 
@@ -96,26 +101,34 @@
         </form>
     {% endif %}
 -->
-
-    {% for comment in comments %}
-    <div class="comment">
-        <h5 class="comment-header">{{comment.user}} said:</h5>
-        <p class='comment-content'>{{comment.rendered_comment() | safe }}</p>
-        <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}<p>
-        <form method="post">
-            <input type="hidden" name="comment_id" value="{{comment.key().id()}}">
-            <input type="submit" name="delete_comment" value="Delete">
-        </form>
-    <!--
-        <form method="post">
-            <input type="hidden" name="edit_comment_id" value="{{comment.key().id()}}">
-            <input type="submit" name='edit_comment' value="Edit">
-        </form>
--->
-    </div>
-    <hr>
-
+    <div id='comment-section'>
+        <h2 class='text-center'>COMMENT SECTION</h2>
+        {% for comment in comments %}
+        <div class="comment">
+            <h3 class="comment-header">{{comment.user}} said:</h3>
+            <p class='comment-content text-justify'>{{comment.rendered_comment() | safe }}</p>
+            <div class="row comment-row">
+                <div class='col-md-4'>
+                    <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}</p>
+                </div>
+                <div class='col-md-offset-6 col-md-1'>
+                    <form method="post">
+                        <input type="hidden" name="comment_id" value="{{comment.key().id()}}">
+                        <input type="submit" name="delete_comment" value="Delete" id='delete-comment-button'>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--
+            <form method="post">
+                <input type="hidden" name="edit_comment_id" value="{{comment.key().id()}}">
+                <input type="submit" name='edit_comment' value="Edit">
+            </form>
+    -->
+        </div>
+        <hr>
     {% endfor %}
+    </div>
 </div>
 
 
