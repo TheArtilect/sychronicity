@@ -135,16 +135,22 @@ input[type='submit']{
 
    /*   permalink   */
 
-.permalink-post{
-    border: 1px solid black;
-}
-.permalink-post-header{
-
-}
-.post-footer{
-
+.row-button{
+    margin-top: 2vh;
 }
 
+#delete-post-button{
+    color: #7F0000;
+}
+
+#comment-textarea{
+    width: 27vw;
+    height: 7vw;
+}
+
+#comment-submit{
+    margin-top: 1vh;
+}
     /*  welcome */
 #welcome-page h2,
 .welcome-body h3{
