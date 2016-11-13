@@ -1,7 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Welcome to the Collective!</h2>
-<p>Thanks for joining us, <b>{{username}}</b>.  You can now create posts on this blog.</p>
+<div id='welcome-page' class='container-fluid'>
+    <h2 class='text-center'>Welcome to the Collective!</h2>
+    <p class='text-center'>Thanks for joining us, <b>{{username}}</b>.
+         You can now create posts, as well as like and comment on posts
+         on this blog.
+    </p>
 
+    <div class='welcome-body text-center'>
+        <h3 class="text-center">YOUR POSTS</h3>
+        <div class='user-posts'>
+            {% for post in posts %}
+            <div class='posts'>
+                <a href="/{{post.key().id()}}">
+                <div class='post-header'>
+                    <h3 class="post-title">{{ post.title}}</h3>
+                </div>
+                <div class="post-content text-justify">
+                    {{ post.rendered_content() | safe }}
+                </div>
+                <div class="post-bottom container-fluid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            {{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}
+                        </div>
+                        <div class="col-md-offset-3 col-md-2">
+                            {{post.number_of_likes()}} Likes
+                        </div>
+                        <div class="col-md-2">{{post.number_of_comments()}}  Comments</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

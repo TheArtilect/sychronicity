@@ -1,9 +1,15 @@
 from Handler import Handler
+import Post
+import User
+from google.appengine.ext import db
 
 class WelcomePage(Handler):
     def get(self):
         if self.user:
-            self.render("welcome.html", username = self.user.name)
-
+            username = self.user.name
         else:
             self.redirect("/login")
+
+        posts = db.GqlQuery("SELECT * FROM Post WHERE creator='%s' ORDER BY created DESC" % username)
+
+        self.render("welcome.html", username = username, posts = posts)

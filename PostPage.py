@@ -133,7 +133,7 @@ class PostPage(Handler):
                 error = "You can only delete your own posts."
 
 
-        if self.request.get("likes"):
+        if self.request.get("likes") and user:
             if (creator == user):
                 error = "You cannot like your own post!"
             else:
@@ -143,7 +143,7 @@ class PostPage(Handler):
 
 
 
-        if self.request.get("unlike"):
+        if self.request.get("unlike") and user:
             post.likes.remove(user)
             post.put()
 

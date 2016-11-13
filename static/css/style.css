@@ -1,15 +1,20 @@
 .navbar{
     font-weight: 900;
-    background-color: #E9E9E9;
+    background-color: #CECECE;
+    font-weight: 800;
 }
 
 body{
     padding-top: 70px;
     font-family: 'Cormorant Garamond', monospace;
     font-weight: 500;
-    background-color: #EFEFEF;
+    background-color: #E5E5E5;
+    font-size: 18px;
 }
 
+hr{
+    border-top: 1px solid black;
+}
 
 
 .error{
@@ -60,12 +65,12 @@ input[type='submit']{
 
 .posts {
     border-collapse: collapse;
-    border: 2px solid gray;
+    border: 2px solid #6D6D6D;
 }
 
 .post-header{
-    border-bottom: 2px solid gray;
-    background-color: #CBCBCB;
+    border-bottom: 2px solid #6D6D6D;
+    background-color: #D6D6D6;
 }
 
 .post-title{
@@ -79,12 +84,15 @@ input[type='submit']{
 .post-content{
     padding-top: 2vh;
     padding-bottom: 2vh;
-    background-color: #F0F0F0;
+    background-color: #EDEDED;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
 
 .post-bottom{
+    border-top: 2px solid #6D6D6D;
     background-color: grey;
-    color: #FCFCFC;
+    color: #F6F6F6;
 }
 
 
@@ -97,8 +105,12 @@ input[type='submit']{
 #new-post h2{
     padding-top: 1vh;
     padding-bottom: 1vh;
+    font-weight: bold;
 }
 
+#new-post-content{
+    font-weight: 800;
+}
 
 #new-post-textarea{
     width: 50vw;
@@ -131,4 +143,14 @@ input[type='submit']{
 }
 .post-footer{
 
+}
+
+    /*  welcome */
+#welcome-page h2,
+.welcome-body h3{
+    font-weight: bold;
+}
+
+.user-posts{
+    padding-top: 1vh;
 }
