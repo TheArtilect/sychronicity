@@ -92,17 +92,14 @@
 
     {% endif %}
 
-<!--- not working, not saving to db
-    {% if edit_comment %}
-        <form method="post">
-            <textarea name="edit_comment_text">{{comment_obj.unrender_comment()}}</textarea>
-            <input type="submit">
-        </form>
-    {% endif %}
--->
     <div id='comment-section'>
         <h2 class='text-center'>COMMENTS SECTION</h2>
+
         {% for comment in comments %}
+            {% if edit_comment %}
+                {% block comment %}
+                {% endblock comment %}
+            {% endif %}
         <div class="comment">
             <h3 class="comment-header text-justify">{{comment.user}} said:</h3>
             <p class='comment-content text-justify'>{{comment.rendered_comment() | safe }}</p>
@@ -110,7 +107,13 @@
                 <div class='col-md-4'>
                     <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}</p>
                 </div>
-                <div class='col-md-offset-6 col-md-1'>
+                <div class="col-md-1 col-md-offset-3">
+                    <form method='post'>
+                        <input type='hidden' name='comment_key_id' value="{{comment.key().id()}}">
+                        <input type='submit' name='edit_comment' value="Edit" id="edit_comment_button">
+                    </form>
+                </div>
+                <div class='col-md-offset-2 col-md-1'>
                     <form method="post">
                         <input type="hidden" name="comment_id" value="{{comment.key().id()}}">
                         <input type="submit" name="delete_comment" value="Delete" id='delete-comment-button'>
@@ -118,17 +121,14 @@
                 </div>
             </div>
         </div>
-        <!--
-            <form method="post">
-                <input type="hidden" name="edit_comment_id" value="{{comment.key().id()}}">
-                <input type="submit" name='edit_comment' value="Edit">
-            </form>
-    -->
-        </div>
-        <hr>
+
+
+
     {% endfor %}
     </div>
 </div>
+<br>
+
 
 
 {% endblock %}

@@ -7,7 +7,7 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
-    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC " % post_id)
+    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY last_modified DESC " % post_id)
 
 class PostPage(Handler):
     def get(self, post_id):
@@ -91,24 +91,27 @@ class PostPage(Handler):
             else:
                 error = "Only the author of this comment can delete it!"
 
-        #   Not sure if comment editing needed, not working anyway
-        #edit_comment = False
-        # comment_obj = None
-        # if self.request.get("edit_comment"):
-        #     comment_id = self.request.get("edit_comment_id")
-        #     comment_key = db.Key.from_path("Comment", int(comment_id),
-        #                                     parent=Comment.comment_key())
-        #     comment_obj = db.get(comment_key)
-        #     print comment_obj.user
-        #     if (user != comment_obj.user):
-        #         error = "Only the author can edit this comment"
-        #     else:
-        #         edit_comment = True
-        #         if self.request.get("edit_comment_text"):
-        #             comment_obj.comment = self.request.get("edit_comment_text")
-        #             comment_obj.put()
-        #             redirect("/%s" % post_id)
 
+        if self.request.get("edit_comment"):
+            comment_id = self.request.get("comment_key_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id),
+                                            parent=Comment.comment_key())
+            comment = db.get(comment_key)
+            if comment.user == user:
+                self.render("edit_comment.html", comment = comment, post = post)
+            else:
+                error = "You can only edit your own comments."
+
+
+
+        if self.request.get("edit_comment_textarea"):
+            comment_id = self.request.get("comment_key_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id),
+                                            parent=Comment.comment_key())
+            comment = db.get(comment_key)
+            comment.comment = self.request.get("edit_comment_textarea")
+            comment.put()
+            self.redirect("%s" % post_id)
 
 
         if (self.request.get("change-title")) or (self.request.get("change-content")):

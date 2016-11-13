@@ -1,13 +1,18 @@
 .navbar{
-    background-color: #F7F7F6;
+    background-color: #363636;
 }
-
+/*
 .navbar-header{
     color: black;
     font-weight: bold;
 }
+*/
+
+
+
 body{
     background-image: url("/static/images/O5GLLH0.jpg");
+    background-size: 25%;
     padding-top: 70px;
     font-family: 'Cormorant Garamond', monospace;
     font-weight: 600;
@@ -28,7 +33,9 @@ a {
     color: black;
 }
 
-a:hover{
+a:hover,
+span:hover,
+.post-title:hover {
     color: #B27300;
 }
 
@@ -54,11 +61,11 @@ a:hover{
 
 .posts {
     border-collapse: collapse;
-    border: 2px solid #575757;
+    border: 2px solid #000;
 }
 
 .post-header{
-    border-bottom: 2px solid #575757;
+    border-bottom: 2px solid #000;
     background-color: #4C4C4C;
     color: white;
     /*  background-color: #98928B; */
@@ -176,6 +183,8 @@ a:hover{
 
 .comment{
     padding-top: 1vh;
+    border-bottom: 1px solid black;
+    padding-bottom: 2vh;
 }
 
 .comment-header {
@@ -206,5 +215,31 @@ a:hover{
     /*  footer  */
 footer{
     padding-bottom: 2vh;
-    font-size: 21px;
+    font-size: 20px;
+}
+
+
+
+span {
+    color: white;
+    font-weight: bold;
+}
+
+.edit_comment{
+    z-index: 9999;
+    float: right;
+    position: fixed;
+    top: 30vh;
+    left: 25vw;
+}
+
+#edit_comment_textarea{
+    width: 50vw;
+    height: 20vw;
+    background-color: black;
+    color: white;
+}
+
+#edit_comment_submit{
+    float: right;
 }

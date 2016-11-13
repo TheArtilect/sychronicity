@@ -1,0 +1,13 @@
+
+
+{% block comment %}
+<div class='edit_comment'>
+    <form method='post'>
+        <input type="hidden" name='comment_key_id' value="{{comment.key().id()}}">
+        <textarea name='edit_comment_textarea' id='edit_comment_textarea'>{{comment.unrender_comment()}}</textarea>
+        <br>
+        <button id="cancel_button">Cancel</button>
+        <input type='submit' id='edit_comment_submit'>
+    </form>
+</div>
+{% endblock comment %}

@@ -1,14 +1,8 @@
 function displayAll(){
-    url = window.location.href;
-
-    function reloadPage(){
-        window.location.replace(url)
-    }
-
-    $(".refresh").on('click', function(){
-        reloadPage()
-
+    $("#edit_comment_button").on("click", function(){
+        $(".edit_comment").css("opacity", "0.5")
     })
+
 
 
 
