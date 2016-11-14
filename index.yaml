@@ -27,12 +27,6 @@ indexes:
   - name: last_modified
     direction: desc
 
-- kind: Comment
-  properties:
-  - name: p_id
-  - name: modified
-    direction: desc
-
 - kind: Post
   properties:
   - name: creator
