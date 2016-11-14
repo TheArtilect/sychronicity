@@ -3,11 +3,13 @@
 {% block comment %}
 <div class='edit_comment'>
     <form method='post'>
+        <h2 id='edit_comment_h2' class="text-left">Edit Your Comment</h2>
         <input type="hidden" name='comment_key_id' value="{{comment.key().id()}}">
         <textarea name='edit_comment_textarea' id='edit_comment_textarea'>{{comment.unrender_comment()}}</textarea>
         <br>
-        <button id="cancel_button">Cancel</button>
         <input type='submit' id='edit_comment_submit'>
+        <button id="cancel_button" >Cancel</button>
+
     </form>
 </div>
 {% endblock comment %}

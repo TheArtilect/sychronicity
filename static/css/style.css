@@ -128,7 +128,10 @@ span:hover,
 }
 
    /*  signup  */
-
+#login-submit{
+    float: right;
+    margin-right: 2vw;
+}
 
    /*   permalink   */
 
@@ -233,13 +236,26 @@ span {
     left: 25vw;
 }
 
+#edit_comment_h2{
+    color: #B27300;
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+
 #edit_comment_textarea{
     width: 50vw;
-    height: 20vw;
+    height: 17vw;
     background-color: black;
     color: white;
+    border: 5px solid #B27300;
 }
 
 #edit_comment_submit{
-    float: right;
+    float: middle;
+}
+
+#edit_comment_submit,
+#cancel_button{
+    color: #B27300;
 }

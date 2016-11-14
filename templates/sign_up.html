@@ -2,7 +2,7 @@
 
 {% block content %}
 <div id="signup" class='col-xs-4 col-xs-offset-4'>
-    <h2>Sign Up</h2>
+    <h2 class="text-justify">Sign Up</h2>
 
     <form method="post">
         <input type="text" name="username" value="{{username}}" placeholder="Username">
@@ -16,7 +16,7 @@
 
         <input type="text" name="email" value="{{email}}" placeholder='Email'>
             <p class="error">{{error_email}}</p>
-        <div class='col-md-1 col-md-offset-2'>
+        <div>
             <button type="submit" class='submit-button' id='login-submit'>Submit</button>
         </div>
     </form>
