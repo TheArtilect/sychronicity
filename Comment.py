@@ -1,8 +1,5 @@
 from google.appengine.ext import db
 
-def comment_key(name = 'default'):
-    return db.Key.from_path('comments', name)
-
 
 
 class Comment(db.Model):
@@ -24,3 +21,8 @@ class Comment(db.Model):
 
     def unrender_comment(self):
         return self.comment.replace("<br>", "\n")
+
+
+
+def comment_key(group = 'default'):
+    return db.Key.from_path('comments', group)
