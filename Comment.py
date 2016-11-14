@@ -1,7 +1,5 @@
 from google.appengine.ext import db
 
-
-
 class Comment(db.Model):
     p_id = db.StringProperty(required = True)
     user = db.StringProperty(required = True)
@@ -24,5 +22,5 @@ class Comment(db.Model):
 
 
 
-def comment_key(group = 'default'):
-    return db.Key.from_path('comments', group)
+def comment_key(name = 'default'):
+    return db.Key.from_path('comments', name)

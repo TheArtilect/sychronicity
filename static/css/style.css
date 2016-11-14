@@ -1,13 +1,6 @@
 .navbar{
     background-color: #363636;
 }
-/*
-.navbar-header{
-    color: black;
-    font-weight: bold;
-}
-*/
-
 
 
 body{
@@ -140,9 +133,14 @@ span:hover,
     width: 40vw;
 }
 
+#edit-cancel{
+    float: left;
+    margin-left: 8vw;
+}
+
 #edit-submit{
-    margin-right: 0;
-    margin-left: 35vw;
+    float: right;
+    margin-right: 30vw;
 }
 
 .row-button{

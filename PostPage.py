@@ -7,7 +7,7 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
-    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC" % post_id)
+    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC" % str(post_id))
 
 class PostPage(Handler):
     def get(self, post_id):
@@ -121,6 +121,9 @@ class PostPage(Handler):
             edit_post = False
             self.redirect("/")
 
+        if (self.request.get("cancel_edit_post")):
+            self.redirect("/%s" % post_id)
+
 
         if self.request.get('edit'):
             if (creator == user):
@@ -157,4 +160,3 @@ class PostPage(Handler):
         self.render("permalink.html", comments = comments, post = post,
                     likes = likes, error = error, edit_post = edit_post,
                     user_already_liked = user_already_liked)
-                    #edit_comment = edit_comment, comment_obj = comment_obj)

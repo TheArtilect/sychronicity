@@ -5,7 +5,6 @@ from string import letters
 
 from google.appengine.ext import db
 
-import hashing
 
 
 

@@ -1,7 +1,0 @@
-put refresh on comment submit
-
-
-edit comments
-
-
-<a href="http://www.freepik.com/free-photos-vectors/background">Background vector designed by Dotstudio - Freepik.com</a>
