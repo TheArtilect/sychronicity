@@ -6,14 +6,18 @@
 ### Quick Start
 -Clone the repo: `git clone https://github.com/TheArtilect/synchronicity.git`
 
+#### Viewing the deployed app
+In order to view the deployed app, point your browser to `https://synchronicity-collective.appspot.com/`
 
-#### Viewing the app
-In order to run the app locally, you will need to have `google app engine (python)` and `gcloud` installed on your system.  Run the command `dev_appserver.py .` while the terminal is in the project directory, the point your browser to `0.0.0.0:8080`
+#### Viewing the app locally
+In order to run the app locally, you will need to have `google app engine (python)` and `gcloud` installed on your system.  Run the command `dev_appserver.py .` while the terminal is in the project directory, then point your browser to `0.0.0.0:8080`
+
+
 
 
 
 ### What's included
-Within the project folder, you will find the following files (image files not included):
+Within the project folder, you will find the following files:
 
 ```
 synchronicity/
