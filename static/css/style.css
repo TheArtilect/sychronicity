@@ -124,11 +124,11 @@ span:hover,
 }
 #login-submit{
     margin-top: 1vh;
-    margin-right: 0;
+    margin-left: 13vw;
 }
 
    /*  signup  */
-#login-submit{
+#signup-submit{
     float: right;
     margin-right: 2vw;
 }
