@@ -1,6 +1,5 @@
 from Handler import Handler
 import Post
-import User
 from google.appengine.ext import db
 
 class WelcomePage(Handler):

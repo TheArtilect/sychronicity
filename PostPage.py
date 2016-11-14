@@ -68,7 +68,7 @@ class PostPage(Handler):
         if self.request.get("comment") and self.user:
             comment = self.request.get("comment")
             p_id = post_id
-            comment_obj = Comment.Comment(parent = Comment.comment_key(),
+            comment_obj = Comment.Comment(parent = Comment.Comment.comment_key(),
                                     p_id = p_id,
                                     user = user,
                                     comment = comment
@@ -81,7 +81,7 @@ class PostPage(Handler):
         if self.request.get("delete_comment"):
             comment_id = self.request.get("comment_id")
             comment_key = db.Key.from_path("Comment", int(comment_id),
-                                            parent=Comment.comment_key())
+                                            parent=Comment.Comment.comment_key())
             comment = db.get(comment_key)
             if user == comment.user:
                 db.delete(comment_key)
@@ -95,7 +95,7 @@ class PostPage(Handler):
         if self.request.get("edit_comment"):
             comment_id = self.request.get("comment_key_id")
             comment_key = db.Key.from_path("Comment", int(comment_id),
-                                            parent=Comment.comment_key())
+                                            parent=Comment.Comment.comment_key())
             comment = db.get(comment_key)
             if comment.user == user:
                 self.render("edit_comment.html", comment = comment, post = post)
@@ -107,7 +107,7 @@ class PostPage(Handler):
         if self.request.get("edit_comment_textarea"):
             comment_id = self.request.get("comment_key_id")
             comment_key = db.Key.from_path("Comment", int(comment_id),
-                                            parent=Comment.comment_key())
+                                            parent=Comment.Comment.comment_key())
             comment = db.get(comment_key)
             comment.comment = self.request.get("edit_comment_textarea")
             comment.put()
