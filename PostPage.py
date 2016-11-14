@@ -7,7 +7,7 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
-    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY last_modified DESC " % post_id)
+    return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC" % post_id)
 
 class PostPage(Handler):
     def get(self, post_id):
