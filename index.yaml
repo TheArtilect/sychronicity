@@ -14,11 +14,6 @@ indexes:
   properties:
   - name: p_id
   - name: created
-
-- kind: Comment
-  properties:
-  - name: p_id
-  - name: created
     direction: desc
 
 - kind: Post
