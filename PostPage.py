@@ -56,7 +56,7 @@ class PostPage(Handler):
 
 
         if not self.user:
-            self.redirect("/login")
+            return self.redirect("/login")
         else:
             user = self.user.name
 

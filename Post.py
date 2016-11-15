@@ -1,7 +1,6 @@
 
 from google.appengine.ext import db
 
-import Comment
 
 class Post(db.Model):
     title = db.StringProperty(required = True)

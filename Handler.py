@@ -12,15 +12,39 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 phrase = "That'sGold,Jerry.GOLD!"
 def make_secure(unsecured):
+    """
+    make_secure: method for creating a secure password keyed-hash using HMAC
+                and a pass phrase.
+    Args:
+        arg1 (data type: str): string input of user's password
+    Returns:
+        returns concatenated string of HMAC keyed-hash password and
+            unsecured password
+    """
     return '%s|%s' % (hmac.new(phrase, unsecured).hexdigest(), unsecured)
 
+
+
 def check_secure(secured_pass):
+    """
+    make_secure: method for creating a secure password keyed-hash using HMAC
+                and a pass phrase.
+    Args:
+        arg1 (data type: str): string input of user's password
+    Returns:
+        returns concatenated string of HMAC keyed-hash password and
+            unsecured password
+    """
     unsecured = secured_pass.split('|')[1]
     if secured_pass == make_secure(unsecured):
         return unsecured
 
 
 class Handler(webapp2.RequestHandler):
+
+    '''
+    This class is the parent handler class
+    '''
 
 
     def write(self, *a, **keywords):
