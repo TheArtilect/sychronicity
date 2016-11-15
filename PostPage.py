@@ -7,9 +7,22 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
+        """
+        get_comments: Method for getting comments for a blog post.
+        Args:
+            post_id (str): Blog post key id.
+
+        Returns:
+            Array of comments
+        """
     return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC" % str(post_id))
 
+
 class PostPage(Handler):
+    """
+        This class is for handling permalinks for each blog post.
+    """
+
     def get(self, post_id):
         post_key = db.Key.from_path("Post", int(post_id),
                                     parent=Post.blog_key())

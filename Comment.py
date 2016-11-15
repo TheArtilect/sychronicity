@@ -1,13 +1,22 @@
 from google.appengine.ext import db
 
 class Comment(db.Model):
+    """
+    This class is comments
+    Attributes:
+        p_id (str): Post key id.
+        user (str): Author of the comment.
+        comment (str): Content of the comment.
+        created (date): Date of when the comment was created.
+        last_modified (date): Date of when the comment was last modified.
+    """
     p_id = db.StringProperty(required = True)
     user = db.StringProperty(required = True)
     comment = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
 
-    #   for all comments in a post
+
     @classmethod
     def retrieve_by_p_id(cls, p_id):
         comments = Comment.all().filter("p_id = ", p_id).get()
