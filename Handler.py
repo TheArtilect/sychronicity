@@ -16,7 +16,7 @@ def make_secure(unsecured):
     make_secure: method for creating a secure password keyed-hash using HMAC
                 and a pass phrase.
     Args:
-        arg1 (data type: str): string input of user's password
+        unsecured (data type: str): string input of user's unsecure password
     Returns:
         returns concatenated string of HMAC keyed-hash password and
             unsecured password

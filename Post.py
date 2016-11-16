@@ -29,8 +29,6 @@ class Post(db.Model):
         """
         rendered_content:  Method for retaining the multiline format of the
                             blogpost.
-        Args:
-            self (str): Blog post content.
 
         Returns:
             String of blog post content with newlines replaced with html breaks.
@@ -60,7 +58,8 @@ class Post(db.Model):
 
     def number_of_comments(self):
         """
-        number_of_comments:  Method for getting the number of likes of a blog post.
+        number_of_comments:  Method for getting the number of likes of a blog
+                                post.
 
         Returns:
             Integer of the number of blog comments.

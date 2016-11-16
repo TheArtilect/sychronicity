@@ -2,7 +2,7 @@ from google.appengine.ext import db
 
 class Comment(db.Model):
     """
-    This class is comments
+    This class is for comments
     Attributes:
         p_id (str): Post key id.
         user (str): Author of the comment.
@@ -19,14 +19,35 @@ class Comment(db.Model):
 
     @classmethod
     def retrieve_by_p_id(cls, p_id):
+        """
+        retrieve_by_p_id: Method for retrieving comments of a blog post by the
+                            post's key id.
+        Args:
+            p_id (data type: str): String of blog post key id.
+        Returns:
+            Array of comments belonging to a blog post.
+        """
         comments = Comment.all().filter("p_id = ", p_id).get()
         return comments
 
 
     def rendered_comment(self):
+        """
+        rendered_comment:  Method for retaining the multiline format of the
+                            blogpost.
+        Returns:
+            String of comment content with newlines replaced with html breaks.
+        """
         return self.comment.replace("\n", "<br>")
 
     def unrender_comment(self):
+        """
+        unrender_comment:  Method for retaining the multiline format of the
+                            blogpost after being retrieved from the database.
+        Returns:
+            String of comment content with html breaks replaced with new line
+            breaks.
+        """
         return self.comment.replace("<br>", "\n")
 
 
