@@ -5,6 +5,9 @@ from Handler import Handler
 from User import User
 
 class SignUpPage(Handler):
+    """
+    This class is a child of Handler and is for SignUpPage.
+    """
     def get(self):
         self.render("sign_up.html")
 
@@ -53,10 +56,33 @@ PASSWORD_RE = re.compile(r"^.{3,20}$")
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
 
 def valid_username(username):
+    """
+    valid_username: Method for checking if a user name is valid.
+    Args:
+        username (data type: str):  A user's name.
+    Returns:
+        True or False
+    """
     return username and USER_RE.match(username)
 
+
 def valid_password(password):
+    """
+    valid_password: Method for checking if a user password is valid.
+    Args:
+        password (data type: str):  A user's password.
+    Returns:
+        True or False
+    """
     return password and PASSWORD_RE.match(password)
 
+
 def valid_email(email):
+    """
+    valid_email: Method for checking if a user's email is valid.
+    Args:
+        email (data type: str):  A user's email.
+    Returns:
+        True or False.
+    """
     return not email or EMAIL_RE.match(email)

@@ -3,6 +3,9 @@ import Post
 from google.appengine.ext import db
 
 class WelcomePage(Handler):
+    """
+    This class is a child of Handler and is for WelcomePage.
+    """
     def get(self):
         if self.user:
             username = self.user.name

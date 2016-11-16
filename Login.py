@@ -2,6 +2,9 @@ from Handler import Handler
 from User import User
 
 class Login(Handler):
+    """
+    This class is a child of Handler and is for Login.
+    """
     def get(self):
         self.render("login.html")
 

@@ -2,7 +2,9 @@ from Handler import Handler
 import Post
 
 class NewPost(Handler):
-
+    """
+    This class is a child of Handler and for NewPost.
+    """
     def get(self):
         if self.user:
             self.render("new_post.html")

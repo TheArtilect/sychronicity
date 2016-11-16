@@ -17,6 +17,9 @@ from google.appengine.ext import db
 
 
 class FrontPage(Handler):
+    """
+    This class is a child of Handler and is for FrontPage.
+    """
     def get(self):
         user = ''
         if self.user:

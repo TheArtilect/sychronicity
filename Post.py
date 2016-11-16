@@ -49,7 +49,6 @@ class Post(db.Model):
     def number_of_likes(self):
         """
         number_of_likes:  Method for getting the number of likes of a blog post.
-
         Returns:
             Integer of the number of blog post likes.
         """
@@ -60,7 +59,6 @@ class Post(db.Model):
         """
         number_of_comments:  Method for getting the number of likes of a blog
                                 post.
-
         Returns:
             Integer of the number of blog comments.
         """

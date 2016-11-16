@@ -20,7 +20,7 @@ def get_comments(post_id):
 
 class PostPage(Handler):
     """
-        This class is for handling permalinks for each blog post.
+    This class is a child of Handler and for is PostPage.
     """
 
     def get(self, post_id):

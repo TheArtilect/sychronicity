@@ -6,11 +6,9 @@ from string import letters
 from google.appengine.ext import db
 
 
-
-
 def make_salt():
     """
-    make_salt:  method for creating salt string for use of hashing user
+    make_salt:  Method for creating salt string for use of hashing user
                 passwords.
     Returns:
         Random string of length five.
