@@ -127,8 +127,6 @@ class PostPage(Handler):
                 comment.comment = self.request.get("edit_comment_textarea")
                 comment.put()
                 self.redirect("%s" % post_id)
-            else:
-                return self.redirect("/login")
 
 
         if (self.request.get("change-title")) or (self.request.get("change-content")):
@@ -166,7 +164,6 @@ class PostPage(Handler):
                 if not (user in likes_list):
                     post.likes.append(user)
                     post.put()
-
 
 
         if self.request.get("unlike") and user:

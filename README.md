@@ -57,3 +57,7 @@ synchronicity/
 [Github](https://github.com/TheArtilect)
 
  agpawaji@gmail.com
+
+#### Credits
+Background vector designed by Dotstudio - Freepik.com
+http://www.freepik.com/free-vector/wrinkled-paper-texture_851248.htm
