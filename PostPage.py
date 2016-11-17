@@ -7,14 +7,14 @@ from google.appengine.ext import db
 
 
 def get_comments(post_id):
-        """
-        get_comments: Method for getting comments for a blog post.
-        Args:
-            post_id (str): Blog post key id.
+    """
+    get_comments: Method for getting comments for a blog post.
+    Args:
+        post_id (str): Blog post key id.
 
-        Returns:
-            Array of comments
-        """
+    Returns:
+        Array of comments
+    """
     return db.GqlQuery("SELECT * FROM Comment WHERE p_id='%s' ORDER BY created DESC" % str(post_id))
 
 
@@ -76,7 +76,8 @@ class PostPage(Handler):
         user_already_liked = (user in likes_list)
 
         if (not self.user) and self.request.get("comment"):
-            self.redirect("/login")
+            return self.redirect("/login")
+
 
         if self.request.get("comment") and self.user:
             comment = self.request.get("comment")
@@ -122,17 +123,22 @@ class PostPage(Handler):
             comment_key = db.Key.from_path("Comment", int(comment_id),
                                             parent=Comment.comment_key())
             comment = db.get(comment_key)
-            comment.comment = self.request.get("edit_comment_textarea")
-            comment.put()
-            self.redirect("%s" % post_id)
+            if comment.user == user:
+                comment.comment = self.request.get("edit_comment_textarea")
+                comment.put()
+                self.redirect("%s" % post_id)
+            else:
+                return self.redirect("/login")
 
 
         if (self.request.get("change-title")) or (self.request.get("change-content")):
-            post.title = self.request.get("change-title")
-            post.content = self.request.get("change-content")
-            post.put()
-            edit_post = False
-            self.redirect("/")
+            if post.creator == user:
+                post.title = self.request.get("change-title")
+                post.content = self.request.get("change-content")
+                post.put()
+                edit_post = False
+                self.redirect("/")
+
 
         if (self.request.get("cancel_edit_post")):
             self.redirect("/%s" % post_id)

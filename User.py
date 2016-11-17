@@ -40,6 +40,10 @@ def valid_pass(name, password, hashed):
     """
     valid_pass: Method for checking if a hashed string matches the string of a
                 user's password after it has been hashed.
+    Args:
+        name (data type: str): User's name
+        password (data type: str): User's password
+        hashed (data type: str) Hashed password
     """
     salt = hashed.split('|')[1]
     return hashed == make_pass_hash(name, password, salt)
@@ -51,7 +55,7 @@ def users_key(group = 'default'):
 
 class User(db.Model):
     """
-    This class is for users
+    This class is for blog users
     Attributes:
         name (str): Username.
         pass_hash (str): The hashed password of a user.
@@ -60,6 +64,7 @@ class User(db.Model):
     name = db.StringProperty(required = True)
     pass_hash = db.StringProperty(required = True)
     email = db.StringProperty()
+
 
     @classmethod
     def retrieve_by_id(cls, user_id):
@@ -85,6 +90,7 @@ class User(db.Model):
         #   query = "SELECT * FROM User WHERE name=%s" % name
         user = User.all().filter('name =', name).get()
         return user
+
 
     @classmethod
     def register (cls, name, password, email = None):

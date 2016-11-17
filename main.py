@@ -32,6 +32,7 @@ class FrontPage(Handler):
 app = webapp2.WSGIApplication([ ("/", FrontPage),
                                 ("/newpost", NewPost),
                                 ('/([0-9]+)', PostPage),
+ #                               ('/([0-9]+/delete)', DeletePost),
                                 ("/signup", SignUpPage),
                                 ("/welcome", WelcomePage),
                                 ("/login", Login),

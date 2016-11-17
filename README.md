@@ -10,9 +10,7 @@
 In order to view the deployed app, point your browser to `https://synchronicity-collective.appspot.com/`
 
 #### Viewing the app locally
-In order to run the app locally, you will need to have `google app engine (python)` and `gcloud` installed on your system.  Run the command `dev_appserver.py .` while the terminal is in the project directory, then point your browser to `0.0.0.0:8080`
-
-
+In order to run the app locally, you will need `google app engine (python)` and `gcloud` installed on your system.  Run the command `dev_appserver.py .` while the terminal is in the project directory, then point your browser to `0.0.0.0:8080`
 
 
 

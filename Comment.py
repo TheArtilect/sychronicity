@@ -2,7 +2,7 @@ from google.appengine.ext import db
 
 class Comment(db.Model):
     """
-    This class is for comments
+    This class is for blog post comments
     Attributes:
         p_id (str): Post key id.
         user (str): Author of the comment.

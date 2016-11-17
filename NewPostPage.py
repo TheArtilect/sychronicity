@@ -13,7 +13,7 @@ class NewPost(Handler):
 
     def post(self):
         if not self.user:
-            self.redirect("/login")
+            return self.redirect("/login")
 
         title = self.request.get("title")
         content = self.request.get("content")
