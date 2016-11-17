@@ -7,16 +7,19 @@ class EditPost(PostPage):
 	"""
 	This class if a child of PostPage handler and is for editing blog posts.
 	"""
+
 	def get(self, post_id):
-        post_key = db.Key.from_path("Post", int(post_id),
+        post_key = db.Key.from_path("Post", int(post_id), 
                                     parent=Post.blog_key())
+
         post = db.get(post_key)
+
         likes_list = post.likes
+
         likes = len(post.likes)
 
-        
         if not self.user:
-        	return seld.redirect("/login")
+        	return self.redirect("/login")
         elif not (self.user == post.creator):
         	self.write("Only the author of the comment can edit this post.")
         	return
@@ -29,10 +32,13 @@ class EditPost(PostPage):
 
 
 
+
 	def post(self, post_id):
         post_key = db.Key.from_path("Post", int(post_id),
                                     parent=Post.blog_key())
+
         post = db.get(post_key)
+
         edit_post = False
 
         if self.request.get('edit'):
