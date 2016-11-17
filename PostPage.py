@@ -97,7 +97,7 @@ class PostPage(Handler):
             comment_key = db.Key.from_path("Comment", int(comment_id),
                                             parent=Comment.comment_key())
             comment = db.get(comment_key)
-            if user == comment.user:
+            if (comment) and (user == comment.user):
                 db.delete(comment_key)
                 post.comments.remove(str(comment_key))
                 post.put()
@@ -111,7 +111,7 @@ class PostPage(Handler):
             comment_key = db.Key.from_path("Comment", int(comment_id),
                                             parent=Comment.comment_key())
             comment = db.get(comment_key)
-            if comment.user == user:
+            if (comment) and (comment.user == user):
                 self.render("edit_comment.html", comment = comment, post = post)
             else:
                 error = "You can only edit your own comments."
@@ -123,7 +123,7 @@ class PostPage(Handler):
             comment_key = db.Key.from_path("Comment", int(comment_id),
                                             parent=Comment.comment_key())
             comment = db.get(comment_key)
-            if comment.user == user:
+            if (comment) and (comment.user == user):
                 comment.comment = self.request.get("edit_comment_textarea")
                 comment.put()
                 self.redirect("%s" % post_id)

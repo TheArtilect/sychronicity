@@ -60,4 +60,5 @@ synchronicity/
 
 #### Credits
 Background vector designed by Dotstudio - Freepik.com
+
 http://www.freepik.com/free-vector/wrinkled-paper-texture_851248.htm
