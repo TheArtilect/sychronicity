@@ -140,7 +140,7 @@ class PostPage(Handler):
                     else:
                         link = self.request.get("change-youtube")
                         vid_id = link.split("=")[1]
-                        youtube = "https://www.youtube.com/embed/%s" % vid_id
+                        youtube = vid_id
                 post.youtube = youtube
                 post.put()
                 edit_post = False

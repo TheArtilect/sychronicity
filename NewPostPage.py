@@ -21,8 +21,7 @@ class NewPost(Handler):
         if self.request.get("youtube"):
             link = self.request.get("youtube")
             vid_id = link.split("=")[1]
-            youtube = "https://www.youtube.com/embed/%s" % vid_id
-            print youtube
+            youtube = vid_id
 
         if title and content:
             creator = self.user.name

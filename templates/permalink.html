@@ -10,10 +10,14 @@
                 <input type="text" name="change-title" value="{{post.title}}">
 
             <br>
-
+            <br>
             <div class="text-left">
                 <label>Youtube Link</label>
-                <input class='youtube-label' type="text" name="change-youtube" value="{{post.youtube}}">
+                {% if post.youtube %}
+                <input class='youtube-label' type="text" name="change-youtube" value="https://youtube.com/watch?v={{post.youtube}}">
+                {% else %}
+                <input class='youtube-label' type="text" name="change-youtube" value="">
+                {% endif %}
              </div>
 
             <h3>Posting</h3>
@@ -44,7 +48,7 @@
         </div>
         {% if post.youtube %}
         <div class="post-youtube">
-            <iframe class='youtube-iframe' src="{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+            <iframe class='youtube-iframe' src="https://www.youtube.com/embed/{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
         </div>
         {% endif %}
         <div class="post-content text-justify">

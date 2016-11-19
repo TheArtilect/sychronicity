@@ -8,7 +8,7 @@ class Post(db.Model):
     Attributes:
         title (str):  Title of post.
         content (str): Content of the post.
-        youtube (link): Link to youtube video.
+        youtube (str): Youtube video id.
         creator (str): Author of the post.
         created (date): Date of when the blog post was created.
         last_modified (date): Date of when the blog post was last modified.
@@ -19,7 +19,7 @@ class Post(db.Model):
 
     title = db.StringProperty(required = True)
     content = db.TextProperty(required = True)
-    youtube = db.LinkProperty()
+    youtube = db.StringProperty()
     creator = db.StringProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     last_modified = db.DateTimeProperty(auto_now = True)
