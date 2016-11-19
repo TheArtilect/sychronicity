@@ -21,6 +21,11 @@
                 <h3 class="post-title">{{ post.title}}</h3>
                 <h4>By: {{post.creator}}</h4>
             </div>
+            {% if post.youtube %}
+            <div class="post-youtube">
+                <iframe class='youtube-iframe' src="{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            {% endif %}
             <div class="post-content text-justify">
                 {{ post.rendered_content() | safe }}
             </div>

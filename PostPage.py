@@ -129,10 +129,19 @@ class PostPage(Handler):
                 self.redirect("%s" % post_id)
 
 
-        if (self.request.get("change-title")) or (self.request.get("change-content")):
+        if (self.request.get("change-title")) or (self.request.get("change-content")) or (self.request.get("change-youtube")):
             if post.creator == user:
                 post.title = self.request.get("change-title")
                 post.content = self.request.get("change-content")
+                youtube = ""
+                if self.request.get("change-youtube"):
+                    if self.request.get("change-youtube") == (None or"None" or ""):
+                        youtube = None
+                    else:
+                        link = self.request.get("change-youtube")
+                        vid_id = link.split("=")[1]
+                        youtube = "https://www.youtube.com/embed/%s" % vid_id
+                post.youtube = youtube
                 post.put()
                 edit_post = False
                 self.redirect("/")

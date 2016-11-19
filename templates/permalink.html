@@ -11,6 +11,11 @@
 
             <br>
 
+            <div class="text-left">
+                <label>Youtube Link</label>
+                <input class='youtube-label' type="text" name="change-youtube" value="{{post.youtube}}">
+             </div>
+
             <h3>Posting</h3>
             <textarea id='edit-post-textarea' name="change-content">{{ post.render_back() | safe }}</textarea>
 
@@ -37,9 +42,11 @@
             <h3 class="post-title">{{ post.title}}</h3>
             <h4>By: {{post.creator}}</h4>
         </div>
+        {% if post.youtube %}
         <div class="post-youtube">
-            <iframe width="560" height="315" src="{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+            <iframe class='youtube-iframe' src="{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
         </div>
+        {% endif %}
         <div class="post-content text-justify">
             {{ post.rendered_content() | safe }}
         </div>
