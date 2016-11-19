@@ -17,11 +17,17 @@ class NewPost(Handler):
 
         title = self.request.get("title")
         content = self.request.get("content")
+        youtube = None
+        if self.request.get("youtube"):
+            link = self.request.get("youtube")
+            vid_id = link.split("=")[1]
+            youtube = "https://www.youtube.com/embed/%s" % vid_id
+            print youtube
 
         if title and content:
             creator = self.user.name
             posting = Post.Post(parent = Post.blog_key(), title = title,
-                                content = content, creator = creator)
+                                content = content, youtube = youtube, creator = creator)
             posting.put()
             posting_id = posting.key().id()
             self.redirect("/%s" % str(posting_id))

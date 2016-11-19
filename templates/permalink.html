@@ -37,6 +37,9 @@
             <h3 class="post-title">{{ post.title}}</h3>
             <h4>By: {{post.creator}}</h4>
         </div>
+        <div class="post-youtube">
+            <iframe width="560" height="315" src="{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+        </div>
         <div class="post-content text-justify">
             {{ post.rendered_content() | safe }}
         </div>
