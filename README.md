@@ -4,7 +4,7 @@
 
 
 ### Quick Start
--Clone the repo: `git clone https://github.com/TheArtilect/synchronicity.git`
+-Clone the repo: `git clone https://github.com/ianagpawa/synchronicity.git`
 
 #### Viewing the deployed app
 In order to view the deployed app, point your browser to `https://synchronicity-collective.appspot.com/`
