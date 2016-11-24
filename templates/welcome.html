@@ -20,6 +20,11 @@
                 <div class='post-header'>
                     <h3 class="post-title">{{ post.title}}</h3>
                 </div>
+                {% if post.youtube %}
+                <div class="post-youtube">
+                    <iframe class='youtube-iframe' src="https://www.youtube.com/embed/{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                {% endif %}
                 <div class="post-content text-justify">
                     {{ post.rendered_content() | safe }}
                 </div>
