@@ -54,7 +54,7 @@ synchronicity/
 **Ian Agpawa**
 
 
-[Github](https://github.com/TheArtilect)
+[Github](https://github.com/ianagpawa)
 
  agpawaji@gmail.com
 
