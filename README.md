@@ -1,5 +1,5 @@
 # The Synchronicity Collective
-### By Ian Agpawa
+
 ##### This repo is for my multiuser blog project from the Udacity Full Stack Nanodegree course.    
 
 
