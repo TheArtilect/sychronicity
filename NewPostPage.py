@@ -20,8 +20,13 @@ class NewPost(Handler):
         youtube = None
         if self.request.get("youtube"):
             link = self.request.get("youtube")
-            vid_id = link.split("=")[1]
-            youtube = vid_id
+            try:
+                vid_id = link.split("=")[1]
+                youtube = vid_id
+            except IndexError:
+                error = "Requires a valid Youtube Link!"
+                return self.render("new_post.html", title=title, content=content, error=error)
+
 
         if title and content:
             creator = self.user.name
@@ -29,7 +34,7 @@ class NewPost(Handler):
                                 content = content, youtube = youtube, creator = creator)
             posting.put()
             posting_id = posting.key().id()
-            self.redirect("/%s" % str(posting_id))
+            return self.redirect("/%s" % str(posting_id))
         else:
             error = "Each post requires both a title and content!"
-            self.render("new_post.html", title=title, content=content, error=error)
+            return self.render("new_post.html", title=title, content=content, error=error)
