@@ -9,7 +9,7 @@ class SignUpPage(Handler):
     This class is a child of Handler and is for SignUpPage.
     """
     def get(self):
-        self.render("sign_up.html")
+        return self.render("sign_up.html")
 
     def post(self):
         self.username = self.request.get("username")
@@ -32,7 +32,7 @@ class SignUpPage(Handler):
             params['error_email'] = "Not a valid email."
 
         if len(params) > 2:
-            self.render("sign_up.html", **params)
+            return self.render("sign_up.html", **params)
         else:
             self.done()
 
@@ -46,7 +46,7 @@ class SignUpPage(Handler):
             user.put()
 
             self.login(user)
-            self.render("welcome.html", username = self.username)
+            return self.render("welcome.html", username = self.username)
 
 
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")

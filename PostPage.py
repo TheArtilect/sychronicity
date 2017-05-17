@@ -38,12 +38,11 @@ class PostPage(Handler):
         comments = get_comments(post_id)
 
 
-
         if not post:
             self.write("There is no post with that id number!")
             return
         else:
-            self.render("permalink.html", comments = comments, post = post,
+            return self.render("permalink.html", comments = comments, post = post,
                         likes = likes, user_already_liked = user_already_liked)
 
 
