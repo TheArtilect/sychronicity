@@ -10,8 +10,8 @@ class WelcomePage(Handler):
         if self.user:
             username = self.user.name
         else:
-            self.redirect("/login")
+            return self.redirect("/login")
 
         posts = db.GqlQuery("SELECT * FROM Post WHERE creator='%s' ORDER BY created DESC" % username)
 
-        self.render("welcome.html", username = username, posts = posts)
+        return self.render("welcome.html", username = username, posts = posts)
