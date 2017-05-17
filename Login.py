@@ -6,7 +6,7 @@ class Login(Handler):
     This class is a child of Handler and is for Login.
     """
     def get(self):
-        self.render("login.html")
+        return self.render("login.html")
 
     def post(self):
         username = self.request.get("username")
@@ -15,7 +15,7 @@ class Login(Handler):
         user = User.login(username, password)
         if user:
             self.login(user)
-            self.redirect("/welcome")
+            return self.redirect("/welcome")
         else:
             error_message = "Invalid login"
-            self.render("login.html", error = error_message)
+            return self.render("login.html", error = error_message)
