@@ -1,3 +1,4 @@
+import re
 from Handler import Handler
 import Post
 
@@ -21,8 +22,16 @@ class NewPost(Handler):
         if self.request.get("youtube"):
             link = self.request.get("youtube")
             try:
-                vid_id = link.split("=")[1]
-                youtube = vid_id
+                checkQ = link.split("/")[3]
+                if '//youtu.be' in link:
+                    checkQ = checkQ.replace("?", "&")
+                    vid_id, times = checkQ.split("&")
+                    times = map(int, re.findall(r'\d+', times))
+                    starting = 60 * times[0] + times[1]
+                    checkQ = "%s?start=%s" % (vid_id, starting)
+                else:
+                    checkQ = link.split('=')[1]
+                youtube = checkQ
             except IndexError:
                 error = "Requires a valid Youtube Link!"
                 return self.render("new_post.html", title=title, content=content, error=error)
