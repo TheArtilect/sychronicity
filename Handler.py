@@ -56,7 +56,7 @@ class Handler(webapp2.RequestHandler):
         Returns:
             Does not return a value
         """
-        self.response.out.write(*a, **keywords)
+        return self.response.out.write(*a, **keywords)
 
 
     def render_str(self, template, **params):
@@ -83,7 +83,7 @@ class Handler(webapp2.RequestHandler):
         Returns:
             Returns a rendered html template.
         """
-        self.write(self.render_str(template, **keywords))
+        return self.write(self.render_str(template, **keywords))
 
 
     def set_secure_cookie(self, name, value):
@@ -94,7 +94,7 @@ class Handler(webapp2.RequestHandler):
             value (data type: str): Value of a cookie
         """
         secured_cookie = make_secure(value)
-        self.response.headers.add_header(
+        return self.response.headers.add_header(
             'Set-Cookie',
             "%s=%s; Path=/" % (name, secured_cookie)
         )
@@ -118,13 +118,13 @@ class Handler(webapp2.RequestHandler):
             user_id (data type: str):   The user key id.
         """
         user_id = str(user.key().id())
-        self.set_secure_cookie('user_id', user_id)
+        return self.set_secure_cookie('user_id', user_id)
 
     def logout(self):
         """
         logout: Method for logging a user out.
         """
-        self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
+        return self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
 
     def initialize(self, *a, **kw):
         """

@@ -125,7 +125,7 @@ class PostPage(Handler):
             if (comment) and (comment.user == user):
                 comment.comment = self.request.get("edit_comment_textarea")
                 comment.put()
-                self.redirect("%s" % post_id)
+                return self.redirect("%s" % post_id)
 
 
         if (self.request.get("change-title")) or (self.request.get("change-content")) or (self.request.get("change-youtube")):
@@ -147,7 +147,7 @@ class PostPage(Handler):
 
 
         if (self.request.get("cancel_edit_post")):
-            self.redirect("/%s" % post_id)
+            return self.redirect("/%s" % post_id)
 
 
         if self.request.get('edit'):
@@ -160,7 +160,7 @@ class PostPage(Handler):
         if self.request.get("delete_post"):
             if (creator == user):
                 db.delete(post_key)
-                self.redirect("/")
+                return self.redirect("/")
             else:
                 error = "You can only delete your own posts."
 
@@ -181,6 +181,6 @@ class PostPage(Handler):
 
 
 
-        self.render("permalink.html", comments = comments, post = post,
+        return self.render("permalink.html", comments = comments, post = post,
                     likes = likes, error = error, edit_post = edit_post,
                     user_already_liked = user_already_liked)

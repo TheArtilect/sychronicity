@@ -9,7 +9,7 @@ class EditPost(PostPage):
 	"""
 
 	def get(self, post_id):
-        post_key = db.Key.from_path("Post", int(post_id), 
+        post_key = db.Key.from_path("Post", int(post_id),
                                     parent=Post.blog_key())
 
         post = db.get(post_key)
@@ -25,7 +25,7 @@ class EditPost(PostPage):
         	return
     	else:
 	        comments = get_comments(post_id)
-	        self.render("edit_post.html", 
+	        return self.render("edit_post.html",
 				        	post = post,
 				        	likes = lies,
 				        	comments = comments)
@@ -54,10 +54,8 @@ class EditPost(PostPage):
                 post.content = self.request.get("change-content")
                 post.put()
                 edit_post = False
-                self.redirect("/")
+                return self.redirect("/")
 
 
         if (self.request.get("cancel_edit_post")):
-            self.redirect("/%s" % post_id)
-
-
+            return self.redirect("/%s" % post_id)
