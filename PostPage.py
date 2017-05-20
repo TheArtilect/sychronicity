@@ -132,8 +132,7 @@ class PostPage(Handler):
 
         if self.request.get("delete_post"):
             if (creator == user):
-                db.delete(post_key)
-                return self.redirect("/")
+                return self.redirect("/delete/%s" % post_id)
             else:
                 error = "You can only delete your own posts."
 

@@ -5,6 +5,7 @@ from Handler import Handler
 from NewPostPage import NewPost
 from PostPage import PostPage
 from EditPost import EditPost
+from DeletePost import DeletePost
 from SignUpPage import SignUpPage
 from WelcomePage import WelcomePage
 from Login import Login
@@ -34,6 +35,7 @@ app = webapp2.WSGIApplication([ ("/", FrontPage),
                                 ("/newpost", NewPost),
                                 ('/([0-9]+)', PostPage),
                                 ('/edit/([0-9]+)', EditPost),
+                                ('/delete/([0-9]+)', DeletePost),
                                 ("/signup", SignUpPage),
                                 ("/welcome", WelcomePage),
                                 ("/login", Login),
