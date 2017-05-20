@@ -62,11 +62,6 @@ class PostPage(Handler):
         likes_list = post.likes
         likes = len(likes_list)
 
-        edit_post = False
-
-        error = ''
-
-
         if not self.user:
             return self.redirect("/login")
         else:
@@ -128,31 +123,9 @@ class PostPage(Handler):
                 return self.redirect("%s" % post_id)
 
 
-        if (self.request.get("change-title")) or (self.request.get("change-content")) or (self.request.get("change-youtube")):
-            if post.creator == user:
-                post.title = self.request.get("change-title")
-                post.content = self.request.get("change-content")
-                youtube = ""
-                if self.request.get("change-youtube"):
-                    if self.request.get("change-youtube") == (None or"None" or ""):
-                        youtube = None
-                    else:
-                        link = self.request.get("change-youtube")
-                        vid_id = link.split("=")[1]
-                        youtube = vid_id
-                post.youtube = youtube
-                post.put()
-                edit_post = False
-                self.redirect("/")
-
-
-        if (self.request.get("cancel_edit_post")):
-            return self.redirect("/%s" % post_id)
-
-
         if self.request.get('edit'):
             if (creator == user):
-                edit_post = True
+                return self.redirect("/edit/%s" % post_id)
             else:
                 error = "Only the author can edit this post!"
 
@@ -179,8 +152,6 @@ class PostPage(Handler):
             post.put()
 
 
-
-
-        return self.render("permalink.html", comments = comments, post = post,
-                    likes = likes, error = error, edit_post = edit_post,
+        return self.render("permalink.html", comments = comments,
+                    post = post, likes = likes, error=error,
                     user_already_liked = user_already_liked)
