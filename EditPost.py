@@ -2,6 +2,7 @@ import re
 from Handler import Handler
 import Post
 import Comment
+import time
 
 from google.appengine.ext import db
 
@@ -57,7 +58,8 @@ class EditPost(Handler):
 					link = self.get_youtube(youtube)
 					post.youtube = link
 				post.put()
-				return self.redirect("/")
+				time.sleep(0.1)
+				return self.redirect("/%s" % post_id)
 
 
 		if (self.request.get("cancel_edit_post")):

@@ -1,6 +1,7 @@
 import re
 from Handler import Handler
 import Post
+import time
 
 class NewPost(Handler):
     """
@@ -43,6 +44,7 @@ class NewPost(Handler):
                                 content = content, youtube = youtube, creator = creator)
             posting.put()
             posting_id = posting.key().id()
+            time.sleep(0.1)
             return self.redirect("/%s" % str(posting_id))
         else:
             error = "Each post requires both a title and content!"
