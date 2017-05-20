@@ -4,6 +4,9 @@
 
 <div class='edit-post text-center'>
     <h2>Edit Your Post</h2>
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
     <form method="post">
         <label><h3>Title</h3></label>
             <input type="text" name="change-title" value="{{post.title}}">
