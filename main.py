@@ -25,7 +25,7 @@ class FrontPage(Handler):
         if self.user:
             user = self.user.name
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")
-        self.render("frontpage.html", posts = posts, user = user)
+        return self.render("frontpage.html", posts = posts, user = user)
 
 
 
