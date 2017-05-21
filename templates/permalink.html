@@ -28,10 +28,10 @@
             </div>
         </div>
     </div>
-
+    <br>
     <div class="container-fluid row-button">
         <div class="row">
-            <div class='col-md-1'>
+            <div class='col-md-1 col-md-offset-1'>
                 {% if user_already_liked %}
                 <form method="post">
                     <input type="submit" name="unlike" value="Unlike" class='unbutton'>
@@ -43,15 +43,20 @@
                 {% endif %}
             </div>
 
+            <div class="col-md-offset-1 col-md-1">
+                <form method="post">
+                    <input type='submit' name='comment' value="Comment" class='unbutton' id='comment-button'>
+                </form>
+            </div>
 
-            <div class=' col-md-offset-4 col-md-1'>
+            <div class=' col-md-offset-2 col-md-1'>
                 <form method='post'>
                     <input type='submit' name="edit" value="Edit" class='unbutton'>
                 </form>
             </div>
 
 
-            <div class="col-md-offset-4 col-md-1">
+            <div class="col-md-offset-3 col-md-1">
                 <form method="post">
                     <input type='submit' name='delete_post' value="Delete" id='delete-post-button'>
                 </form>
@@ -62,18 +67,6 @@
     {% if error %}
     <p class='error text-center'>{{error}}</p>
     {% endif %}
-    <hr>
-    <div class='text-center post-comment'>
-        <form method='post'>
-            <h3>Post a comment below:</h3>
-            <textarea id='comment-textarea' name="comment" value=""></textarea>
-            <br>
-            <div class='col-md-offset-8 col-md-1' id='comment-submit'>
-                <input type='submit'>
-            </div>
-        </form>
-    </div>
-    <br>
     <hr>
 
 

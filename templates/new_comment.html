@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="permalink">
+
+    <div class='posts'>
+        <div class='post-header text-center'>
+            <h3 class="post-title">{{ post.title}}</h3>
+            <h4>By: {{post.creator}}</h4>
+        </div>
+        {% if post.youtube %}
+        <div class="post-youtube">
+            <iframe class='youtube-iframe' src="https://www.youtube.com/embed/{{post.youtube}}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+        <div class="post-content text-justify">
+            {{ post.rendered_content() | safe }}
+        </div>
+        <div class="post-bottom container-fluid">
+            <div class="row">
+                <div class="col-md-5">
+                    {{post.last_modified.strftime("Last Modified: %b %d, %Y %I:%M %p")}}
+                </div>
+                <div class="col-md-offset-3 col-md-2">
+                    {{post.number_of_likes()}} Likes
+                </div>
+                <div class="col-md-2">{{post.number_of_comments()}}  Comments</div>
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    {% if error %}
+    <p class='error text-center'>{{error}}</p>
+    {% endif %}
+    <hr>
+
+
+    <div class='text-center post-comment'>
+        <form method='post'>
+            <h3>Post a comment below:</h3>
+            <textarea id='comment-textarea' name="comment" value=""></textarea>
+            <br>
+            <div class='col-md-offset-8 col-md-1' id='comment-submit'>
+                <input type='submit'>
+            </div>
+        </form>
+    </div>
+    <br>
+    <hr>
+
+
+
+    <div id='comment-section'>
+        <h2 class='text-center'>COMMENTS SECTION</h2>
+
+        {% for comment in comments %}
+
+        <div class="comment">
+            <h3 class="comment-header text-justify">{{comment.user}} said:</h3>
+            <p class='comment-content text-justify'>{{comment.rendered_comment() | safe }}</p>
+            <div class="row comment-row">
+                <div class='col-md-4'>
+                    <p>{{comment.created.strftime("%I:%M %p on %b %d, %Y")}}</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+
+
+{% endblock %}
