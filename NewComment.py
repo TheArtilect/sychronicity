@@ -61,4 +61,4 @@ class NewComment(Handler):
             post.comments.append(str(comment_key))
             post.put()
             time.sleep(0.1)
-            return self.redirect("/")
+            return self.redirect("/%s" % post_id)

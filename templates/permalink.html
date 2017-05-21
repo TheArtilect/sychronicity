@@ -75,10 +75,6 @@
         <h2 class='text-center'>COMMENTS SECTION</h2>
 
         {% for comment in comments %}
-            {% if edit_comment %}
-                {% block comment %}
-                {% endblock comment %}
-            {% endif %}
         <div class="comment">
             <h3 class="comment-header text-justify">{{comment.user}} said:</h3>
             <p class='comment-content text-justify'>{{comment.rendered_comment() | safe }}</p>

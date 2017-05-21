@@ -94,18 +94,17 @@ class PostPage(Handler):
                 return self.redirect('/comment/new/%s' % post_id)
 
 
-        # if self.request.get("comment") and self.user:
-        #     comment = self.request.get("comment")
-        #     p_id = post_id
-        #     comment_obj = Comment.Comment(parent = Comment.comment_key(),
-        #                             p_id = p_id,
-        #                             user = user,
-        #                             comment = comment
-        #                             )
-        #     comment_key = comment_obj.put()
-        #     post.comments.append(str(comment_key))
-        #     post.put()
-        #
+        if self.request.get("edit_comment"):
+            comment_id = self.request.get("comment_key_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id), parent=Comment.comment_key())
+            comment = db.get(comment_key)
+            if not self.user:
+                return self.redirect('/login')
+
+            elif not (self.user.name == comment.user):
+                error = "You can only edit your own comments!"
+            else:
+                return self.redirect("/comment/edit/%s" % comment_id)
         #
         # if self.request.get("delete_comment"):
         #     comment_id = self.request.get("comment_id")
@@ -121,27 +120,6 @@ class PostPage(Handler):
         #         error = "Only the author of this comment can delete it!"
         #
         #
-        # if self.request.get("edit_comment"):
-        #     comment_id = self.request.get("comment_key_id")
-        #     comment_key = db.Key.from_path("Comment", int(comment_id),
-        #                                     parent=Comment.comment_key())
-        #     comment = db.get(comment_key)
-        #     if (comment) and (comment.user == user):
-        #         self.render("edit_comment.html", comment = comment, post = post)
-        #     else:
-        #         error = "You can only edit your own comments."
-        #
-        #
-        #
-        # if self.request.get("edit_comment_textarea"):
-        #     comment_id = self.request.get("comment_key_id")
-        #     comment_key = db.Key.from_path("Comment", int(comment_id),
-        #                                     parent=Comment.comment_key())
-        #     comment = db.get(comment_key)
-        #     if (comment) and (comment.user == user):
-        #         comment.comment = self.request.get("edit_comment_textarea")
-        #         comment.put()
-        #         return self.redirect("%s" % post_id)
 
 
 
