@@ -6,4 +6,4 @@ class Logout(Handler):
     """
     def get(self):
         self.logout()
-        return self.redirect("/signup")
+        return self.redirect("/")
