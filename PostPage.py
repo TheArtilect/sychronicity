@@ -105,6 +105,19 @@ class PostPage(Handler):
                 error = "You can only edit your own comments!"
             else:
                 return self.redirect("/comment/edit/%s" % comment_id)
+
+
+        if self.request.get("delete_comment"):
+            comment_id = self.request.get("comment_id")
+            comment_key = db.Key.from_path("Comment", int(comment_id), parent=Comment.comment_key())
+            comment = db.get(comment_key)
+            if not self.user:
+                return self.redirect('/login')
+
+            elif not (self.user.name == comment.user):
+                error = "You can only edit your own comments!"
+            else:
+                return self.redirect("/comment/delete/%s" % comment_id)
         #
         # if self.request.get("delete_comment"):
         #     comment_id = self.request.get("comment_id")

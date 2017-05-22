@@ -8,6 +8,7 @@ from EditPost import EditPost
 from DeletePost import DeletePost
 from NewComment import NewComment
 from EditComment import EditComment
+from DeleteComment import DeleteComment
 from SignUpPage import SignUpPage
 from WelcomePage import WelcomePage
 from Login import Login
@@ -40,6 +41,7 @@ app = webapp2.WSGIApplication([ ("/", FrontPage),
                                 ('/delete/([0-9]+)', DeletePost),
                                 ('/comment/new/([0-9]+)', NewComment),
                                 ('/comment/edit/([0-9]+)', EditComment),
+                                ('/comment/delete/([0-9]+)', DeleteComment),
                                 ("/signup", SignUpPage),
                                 ("/welcome", WelcomePage),
                                 ("/login", Login),
