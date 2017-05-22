@@ -22,7 +22,7 @@ class DeletePost(Handler):
             return self.redirect('/')
 
         else:
-            return self.render("deletepost.html", post=post)
+            return self.render("delete_post.html", post=post)
 
 
 
